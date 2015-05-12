@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Common.h"
 #import "Define.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
 
-@interface RegisterVC : UIViewController
+@interface RegisterVC : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *tfFullName;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmail;
 @property (weak, nonatomic) IBOutlet UITextField *tfPass;
@@ -22,5 +25,6 @@
 
 - (IBAction)actionRegister:(id)sender;
 - (IBAction)actionBack:(id)sender;
+- (IBAction)actionHideKeyboard:(id)sender;
 
 @end

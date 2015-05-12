@@ -16,3 +16,12 @@
 
 #pragma mark - MESSAGE
 #define MSS_NOTICE_LOGOUT @"Are you want to logout?"
+#define MSS_REGISTER_INVALID_FULLNAME @"Full name is invalid."
+#define MSS_REGISTER_INVALID_EMAIL @"Email is invalid."
+#define MSS_REGISTER_INVALID_PASSWORD @"Password is invalid."
+#define MSS_REGISTER_INVALID_CONFIRM_PASS @"Confirm password is invalid."
+#define MSS_REGISTER_INVALID_PASS_NOT_MATCH @"Password not match."
+#define MSS_REGISTER_INVALID_PHONE_NUMBER @"Phone Number is invalid."
+
+#define MSS_LOGIN_INVALID_EMAIL @"Email is invalid."
+#define MSS_LOGIN_INVALID_PASSWORD @"Password is invalid."

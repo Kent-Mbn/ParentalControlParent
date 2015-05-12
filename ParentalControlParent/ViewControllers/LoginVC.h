@@ -10,8 +10,11 @@
 #import "Common.h"
 #import "Define.h"
 #import "AppDelegate.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
 
-@interface LoginVC : UIViewController
+@interface LoginVC : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *viewBGInput;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrBG;
@@ -22,6 +25,7 @@
 - (IBAction)actionForgotPass:(id)sender;
 - (IBAction)actionRegister:(id)sender;
 - (IBAction)actionLogin:(id)sender;
+- (IBAction)actionHideKeyboard:(id)sender;
 
 
 

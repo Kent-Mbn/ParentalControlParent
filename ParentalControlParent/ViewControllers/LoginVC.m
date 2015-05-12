@@ -37,6 +37,51 @@
 }
 */
 
+#pragma TEXT FIELD DELEGATE
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == _tfEmail) {
+        [_scrBG setContentOffset:CGPointMake(0, 30) animated:YES];
+    }
+    
+    if (textField == _tfPassword) {
+        [_scrBG setContentOffset:CGPointMake(0, 60) animated:YES];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == _tfEmail) {
+        [_tfPassword becomeFirstResponder];
+    }
+    if(textField == _tfPassword) {
+        [self actionLogin:nil];
+    }
+    return YES;
+}
+
+
+#pragma mark - FUNCTION
+
+- (BOOL) validInPut {
+    if (_tfEmail.text.length == 0 || ![Common isValidEmail:_tfEmail.text]) {
+        [Common showAlertView:APP_NAME message:MSS_LOGIN_INVALID_EMAIL delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        return NO;
+    }
+    
+    if (_tfPassword.text.length == 0) {
+        [Common showAlertView:APP_NAME message:MSS_LOGIN_INVALID_PASSWORD delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        return NO;
+    }
+    return YES;
+}
+
+- (void) callWSLogin {
+    
+}
+
+
+#pragma mark - ACTION
+
 - (IBAction)actionForgotPass:(id)sender {
 }
 
@@ -44,8 +89,17 @@
 }
 
 - (IBAction)actionLogin:(id)sender {
-    [APP_DELEGATE setRootViewLoginWithCompletion:^{
-        
-    }];
+    if ([self validInPut]) {
+        [self actionHideKeyboard:nil];
+        [self callWSLogin];
+        [APP_DELEGATE setRootViewLoginWithCompletion:^{
+            
+        }];
+    }
+}
+- (IBAction)actionHideKeyboard:(id)sender {
+    [_tfEmail resignFirstResponder];
+    [_tfPassword resignFirstResponder];
+    [_scrBG setContentOffset:CGPointMake(0, -20) animated:YES];
 }
 @end

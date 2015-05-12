@@ -39,4 +39,26 @@
     return location;
 }
 
++ (void) updateDeviceToken:(NSString *) newDeviceToken {
+    [[NSUserDefaults standardUserDefaults] setObject:newDeviceToken forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) getDeviceToken {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+}
+
++ (BOOL) isValidEmail:(NSString *)checkString
+{
+    checkString = [checkString lowercaseString];
+    BOOL stricterFilter = YES;
+    NSString *stricterFilterString = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSString *laxString = @".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
+    
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:checkString];
+}
+
 @end

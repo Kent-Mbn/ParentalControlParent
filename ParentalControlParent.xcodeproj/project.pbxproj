@@ -140,6 +140,7 @@
 		D903E5421AF9B99700760189 /* ParentalControlParentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParentalControlParentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D903E5471AF9B99700760189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D903E5481AF9B99700760189 /* ParentalControlParentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParentalControlParentTests.m; sourceTree = "<group>"; };
+		D9503FA01B01DC1D00252DD1 /* APIService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIService.h; sourceTree = "<group>"; };
 		D98F6DD41B006C8E00F1D855 /* button-arrowback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-arrowback.png"; sourceTree = "<group>"; };
 		D98F6DD51B006C8E00F1D855 /* button-arrowback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-arrowback@2x.png"; sourceTree = "<group>"; };
 		D9A882271AFB0AA700B66EC9 /* set_area.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set_area.png; sourceTree = "<group>"; };
@@ -441,6 +442,7 @@
 		D9A929D21AF9CDFA0061658A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D9503FA01B01DC1D00252DD1 /* APIService.h */,
 				D9A929DB1AF9FB4B0061658A /* Common.h */,
 				D9A929DC1AF9FB4B0061658A /* Common.m */,
 				D9A882AF1AFB454E00B66EC9 /* Define.h */,
