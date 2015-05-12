@@ -37,7 +37,8 @@
 }
 */
 
-#pragma TEXT FIELD DELEGATE
+#pragma mark - TEXT FIELD DELEGATE
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField == _tfEmail) {
         [_scrBG setContentOffset:CGPointMake(0, 30) animated:YES];
@@ -76,7 +77,28 @@
 }
 
 - (void) callWSLogin {
-    
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            @"email":_tfEmail.text,
+                                            @"password":_tfPassword.text,
+                                            @"register_id":[Common getDeviceToken],
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_USER_LOGIN));
+    [manager POST:URL_SERVER_API(API_USER_LOGIN) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response LOGIN: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            [APP_DELEGATE setRootViewLoginWithCompletion:^{
+                
+            }];
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
 }
 
 
@@ -92,9 +114,6 @@
     if ([self validInPut]) {
         [self actionHideKeyboard:nil];
         [self callWSLogin];
-        [APP_DELEGATE setRootViewLoginWithCompletion:^{
-            
-        }];
     }
 }
 - (IBAction)actionHideKeyboard:(id)sender {

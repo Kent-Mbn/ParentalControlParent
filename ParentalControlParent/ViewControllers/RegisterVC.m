@@ -72,7 +72,28 @@
 
 #pragma mark - WEBSERVICE
 - (void) callWSRegister {
-    
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            @"email":_tfEmail.text,
+                                            @"password":_tfPass.text,
+                                            @"fullname":_tfFullName.text,
+                                            @"phone_number":_tfPhoneNum.text,
+                                            @"register_id":[Common getDeviceToken],
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_USER_REGISTER));
+    [manager POST:URL_SERVER_API(API_USER_REGISTER) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response LOGIN: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_REGISTER_FAILDED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_REGISTER_FAILDED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
 }
 
 #pragma mark - ACTION

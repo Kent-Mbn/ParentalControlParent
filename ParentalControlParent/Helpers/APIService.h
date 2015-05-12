@@ -10,13 +10,14 @@
 
 //SERVER OF ODC TEAM
 
-#define SERVER_IP   @"http://172.20.2.12"
+#define SERVER_IP   @"http://172.20.2.19"
 #define SERVER_PORT @"8015"
 
 #define URL_SERVER_API_FULL [NSString stringWithFormat:@"%@:%@", SERVER_IP, SERVER_PORT]
 #define URL_SERVER_API(method) [NSString stringWithFormat:@"%@%@",URL_SERVER_API_FULL,method]
 
 #define API_USER_REGISTER @"/user/register"
+#define API_USER_LOGIN @"/user/login"
 
 
 /*
