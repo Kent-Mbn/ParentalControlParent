@@ -89,6 +89,16 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response LOGIN: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
+            
+            //Save information
+            NSArray *arrRespone = (NSArray *) responseObject;
+            NSDictionary *userDic = arrRespone[1][@"user"];
+            [[UserDefault user] setEmail:userDic[@"user"]];
+            [[UserDefault user] setFull_name:userDic[@"fullname"]];
+            [[UserDefault user] setParent_id:userDic[@"id"]];
+            [[UserDefault user] setPhone_number:userDic[@"phone_number"]];
+            [[UserDefault user] setToken_device:[Common getDeviceToken]];
+            
             [APP_DELEGATE setRootViewLoginWithCompletion:^{
                 
             }];

@@ -30,3 +30,8 @@
 #define MSS_LOGIN_INVALID_EMAIL @"Email is invalid."
 #define MSS_LOGIN_INVALID_PASSWORD @"Password is invalid."
 #define MSS_LOGIN_FAILED @"Login failed!"
+
+#define MSS_ADD_PAIR_FAILED @"Add pair failed!"
+#define MSS_ADD_PAIR_NICK_NAME_INVALID @"Nick name is invalid."
+#define MSS_ADD_PAIR_PHONE_NUMBER_INVALID @"Phone Number is invalid."
+#define MSS_ADD_PAIR_PUSH_NOTIFICATION_MESSAGE @"Request pair"

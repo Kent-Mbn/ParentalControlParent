@@ -172,6 +172,7 @@
     tokenStr = [tokenStr stringByReplacingOccurrencesOfString:@">" withString:@""];
     tokenStr = [tokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     [Common updateDeviceToken:tokenStr];
+    NSLog(@"Token device: %@", tokenStr);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{

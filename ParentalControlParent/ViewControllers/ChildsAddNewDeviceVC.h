@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Define.h"
+#import "Common.h"
+#import "APIService.h"
+#import "UserDefault.h"
 
-@interface ChildsAddNewDeviceVC : UIViewController
+@interface ChildsAddNewDeviceVC : UIViewController<UITextFieldDelegate>
 - (IBAction)actionBack:(id)sender;
 - (IBAction)actionDone:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *tfEmail;
+
 @property (weak, nonatomic) IBOutlet UITextField *tfPhoneNumber;
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
-
-@property (weak, nonatomic) IBOutlet UITextField *tfFullName;
+@property (weak, nonatomic) IBOutlet UITextField *tfNickName;
 @end

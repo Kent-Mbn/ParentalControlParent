@@ -47,7 +47,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    
+    NSLog(@"Parent Id: %@", [UserDefault user].parent_id);
 }
 
 - (void) viewDidAppear:(BOOL)animated {
