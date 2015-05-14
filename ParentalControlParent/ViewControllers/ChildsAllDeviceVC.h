@@ -9,9 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ChildsAllDeviceCell.h"
 #import "Define.h"
+#import "Common.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
+#import "DeviceObj.h"
 
 @interface ChildsAllDeviceVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tblView;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
+@property (nonatomic, strong) NSMutableArray *arrayData;
 - (IBAction)actionAddNewDevice:(id)sender;
 @end

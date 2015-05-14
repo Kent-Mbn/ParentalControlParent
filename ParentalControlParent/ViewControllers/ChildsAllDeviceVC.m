@@ -21,6 +21,11 @@
     
     //Hide navigation bar
     [self.navigationController setNavigationBarHidden:YES];
+    _arrayData = [[NSMutableArray alloc] init];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [self callWSListAllDevices];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,16 +52,48 @@
     [self performSegueWithIdentifier:@"segueToChangeSafeArea" sender:nil];
 }
 
+#pragma mark - FUNCTIONS
+- (void) callWSListAllDevices {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_GET_LIST_CHILD([UserDefault user].parent_id)));
+    [manager POST:URL_SERVER_API(API_GET_LIST_CHILD([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            //Save data to array
+            [_arrayData removeAllObjects];
+            NSArray *arrTemp = responseObject[0][@"devices"];
+            for (int i = 0; i < [arrTemp count]; i++) {
+                NSDictionary *objDic = [arrTemp objectAtIndex:i];
+                [_arrayData addObject:objDic];
+            }
+            
+            //Reload table
+            [_tblView reloadData];
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
+}
+
 #pragma mark - TABLEVIEW DELEGATE
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [_arrayData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChildsAllDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChildsAllDeviceCellId" forIndexPath:indexPath];
-    cell.lblName.text = @"Huynh Phong Chau";
-    cell.lblEmail.text = @"huynhphongchau@gmail.com";
-    cell.lblPhoneNumber.text = @"090565656475";
+    NSDictionary *objDic = [_arrayData objectAtIndex:indexPath.row];
+    cell.lblName.text = objDic[@"fullname"];
+    cell.lblEmail.text = objDic[@"email"];
+    cell.lblPhoneNumber.text = objDic[@"phone_number"];
     [cell.btSetArea addTarget:self action:@selector(goToChangeSafeArea:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }

@@ -18,6 +18,7 @@
 		D903E5491AF9B99700760189 /* ParentalControlParentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D903E5481AF9B99700760189 /* ParentalControlParentTests.m */; };
 		D98F6DD61B006C8E00F1D855 /* button-arrowback.png in Resources */ = {isa = PBXBuildFile; fileRef = D98F6DD41B006C8E00F1D855 /* button-arrowback.png */; };
 		D98F6DD71B006C8E00F1D855 /* button-arrowback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D98F6DD51B006C8E00F1D855 /* button-arrowback@2x.png */; };
+		D99709021B0446EE003E514F /* DeviceObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D99709011B0446EE003E514F /* DeviceObj.m */; };
 		D9A882291AFB0AA700B66EC9 /* set_area.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A882271AFB0AA700B66EC9 /* set_area.png */; };
 		D9A8822A1AFB0AA700B66EC9 /* set_area@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9A882281AFB0AA700B66EC9 /* set_area@2x.png */; };
 		D9A8822F1AFB0B2A00B66EC9 /* ChildsAllDeviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A8822E1AFB0B2A00B66EC9 /* ChildsAllDeviceVC.m */; };
@@ -144,6 +145,8 @@
 		D9503FA01B01DC1D00252DD1 /* APIService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIService.h; sourceTree = "<group>"; };
 		D98F6DD41B006C8E00F1D855 /* button-arrowback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-arrowback.png"; sourceTree = "<group>"; };
 		D98F6DD51B006C8E00F1D855 /* button-arrowback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-arrowback@2x.png"; sourceTree = "<group>"; };
+		D99709001B0446EE003E514F /* DeviceObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceObj.h; sourceTree = "<group>"; };
+		D99709011B0446EE003E514F /* DeviceObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceObj.m; sourceTree = "<group>"; };
 		D9A882271AFB0AA700B66EC9 /* set_area.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set_area.png; sourceTree = "<group>"; };
 		D9A882281AFB0AA700B66EC9 /* set_area@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_area@2x.png"; sourceTree = "<group>"; };
 		D9A8822D1AFB0B2A00B66EC9 /* ChildsAllDeviceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildsAllDeviceVC.h; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 				D9A8822E1AFB0B2A00B66EC9 /* ChildsAllDeviceVC.m */,
 				D9A882341AFB0FAA00B66EC9 /* ChildsAllDeviceCell.h */,
 				D9A882351AFB0FAA00B66EC9 /* ChildsAllDeviceCell.m */,
+				D99709001B0446EE003E514F /* DeviceObj.h */,
+				D99709011B0446EE003E514F /* DeviceObj.m */,
 			);
 			name = ChildsAllDeviceVC;
 			sourceTree = "<group>";
@@ -858,6 +863,7 @@
 				D9A882361AFB0FAA00B66EC9 /* ChildsAllDeviceCell.m in Sources */,
 				D903E5351AF9B99700760189 /* ViewController.m in Sources */,
 				D9A92A3F1AFA2ED00061658A /* HistorySelectDevicesCell.m in Sources */,
+				D99709021B0446EE003E514F /* DeviceObj.m in Sources */,
 				D9A882AB1AFB27CA00B66EC9 /* MyProfileVC.m in Sources */,
 				D9DDEE361AFC5EC100848B57 /* TrackingVC.m in Sources */,
 				D903E5321AF9B99700760189 /* ParentalControlParent.xcdatamodeld in Sources */,

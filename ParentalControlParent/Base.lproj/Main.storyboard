@@ -868,6 +868,7 @@
                     <navigationItem key="navigationItem" title="Childs" id="nFY-6f-54p"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="tblView" destination="tmO-rY-t1A" id="1jd-k3-BrA"/>
                         <outlet property="viewTopbar" destination="eh6-oD-dxj" id="k6s-kU-oTV"/>
                         <segue destination="dYU-wV-m5O" kind="push" identifier="segueToEditDevice" id="JsC-IH-kP5"/>
                         <segue destination="0gR-fL-SVr" kind="push" identifier="segueToChangeSafeArea" id="oGs-AO-iad"/>

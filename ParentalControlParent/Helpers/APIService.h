@@ -21,6 +21,8 @@
 #define API_ADD_PAIR(parent_id) [NSString stringWithFormat:@"/userdevice/addpair/%@", parent_id]
 #define API_ADD_PAIR_PUSH_NOTIFICATION @"/userdevice/pushnotificationios"
 
+#define API_GET_LIST_CHILD(parent_id) [NSString stringWithFormat:@"/user/children/%@", parent_id] 
+
 
 /*
 #define API_GET_USER_POST_LIST @"/user/stat"
