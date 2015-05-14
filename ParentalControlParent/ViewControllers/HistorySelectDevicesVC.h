@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "HistorySelectDevicesCell.h"
 #import "Define.h"
+#import "Common.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
+
 
 @interface HistorySelectDevicesVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblDevices;
 - (IBAction)actionCancel:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
+@property (nonatomic, strong) NSMutableArray *arrayData;
 
 @end

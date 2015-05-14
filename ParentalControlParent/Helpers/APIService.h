@@ -22,6 +22,7 @@
 #define API_ADD_PAIR_PUSH_NOTIFICATION @"/userdevice/pushnotificationios"
 
 #define API_GET_LIST_CHILD(parent_id) [NSString stringWithFormat:@"/user/children/%@", parent_id] 
+#define API_TRACKING_ALL_CHILD(parent_id) [NSString stringWithFormat:@"/history/trackingallchild/%@", parent_id]
 
 
 /*

@@ -13,7 +13,6 @@
 @end
 
 @implementation TrackingVC
-@synthesize arrayLocationPins = _arrayLocationPins;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,29 +20,15 @@
     [self.navigationController setNavigationBarHidden:YES];
     
     _viewTopbar.backgroundColor = masterColor;
+    _arrData = [[NSMutableArray alloc] init];
     _arrayLocationPins = [[NSMutableArray alloc] init];
     
-    //Add 2 points to map
-    CLLocationCoordinate2D cooPoint1 = [Common get2DCoordFromString:@"0.012743,0.019655"];
-    MKPointAnnotation *point1 = [[MKPointAnnotation alloc] init];
-    point1.coordinate = cooPoint1;
-    point1.title = @"Huynh Phong Chau";
-    point1.subtitle = @"Da Nang";
+    [Common roundView:_tblView andRadius:10];
     
-    CLLocationCoordinate2D cooPoint2 = [Common get2DCoordFromString:@"-0.0082,0.039255"];
-    MKPointAnnotation *point2 = [[MKPointAnnotation alloc] init];
-    point2.coordinate = cooPoint2;
-    point2.title = @"Huynh Phong Chau";
-    point2.subtitle = @"Da Nang";
+    UIColor *colorBgViewTbl = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+    [_viewTblView setBackgroundColor:colorBgViewTbl];
     
-    [_arrayLocationPins addObject:point1];
-    [_arrayLocationPins addObject:point2];
-    
-    for (int i = 0; i < [_arrayLocationPins count]; i++) {
-        [_mapView addAnnotation:[_arrayLocationPins objectAtIndex:i]];
-    }
-    [self zoomToFitMapAnnotations];
-    
+    [self hideViewLoadListDevice];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -52,6 +37,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [self callWSTrackingAllChild];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,12 +57,32 @@
 
 #pragma mark - ACTION
 - (IBAction)actionListDevice:(id)sender {
-    [self performSegueWithIdentifier:@"sugueToListDeviceFromTracking" sender:nil];
+    //[self performSegueWithIdentifier:@"sugueToListDeviceFromTracking" sender:nil];
     //[self focusToAPoint:[_arrayLocationPins objectAtIndex:0]];
-    
+    [self showViewLoadListDevice];
+}
+
+- (IBAction)actionHideViewTbl:(id)sender {
+    [self hideViewLoadListDevice];
 }
 
 #pragma mark - FUNCTION
+- (void) addArrayLocationToMap {
+    [_arrayLocationPins removeAllObjects];
+    for (int i = 0; i < [_arrData count]; i++) {
+        NSDictionary *dicObj = [_arrData objectAtIndex:i];
+        CLLocationCoordinate2D cooPoint = [Common get2DCoordFromString:[NSString stringWithFormat:@"%@,%@", dicObj[@"latitude"], dicObj[@"longitude"]]];
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        point.coordinate = cooPoint;
+        point.title = dicObj[@"fullname"];
+        point.subtitle = dicObj[@"address"];
+        
+        [_arrayLocationPins addObject:point];
+        [_mapView addAnnotation:point];
+    }
+    [self zoomToFitMapAnnotations:_arrayLocationPins];
+}
+
 -(void) addPinViewToMap:(CLLocationCoordinate2D) location {
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = location;
@@ -85,26 +91,66 @@
     [_mapView addAnnotation:point];
 }
 
--(void) zoomToFitMapAnnotations {
+-(void) zoomToFitMapAnnotations:(NSMutableArray *)arrLocationPins {
     if ([_mapView.annotations count] == 0) {
         return;
     }
     
-    MKMapPoint points[[_arrayLocationPins count]];
-    for (int i = 0; i < [_arrayLocationPins count]; i++) {
+    MKMapPoint points[[arrLocationPins count]];
+    for (int i = 0; i < [arrLocationPins count]; i++) {
         CLLocation *locationTemp;
-        locationTemp = (CLLocation *)[_arrayLocationPins objectAtIndex:i];
+        locationTemp = (CLLocation *)[arrLocationPins objectAtIndex:i];
         points[i] = MKMapPointForCoordinate(locationTemp.coordinate);
     }
     
-    MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[_arrayLocationPins count]];
+    MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrLocationPins count]];
     [_mapView setVisibleMapRect:[poly boundingMapRect] edgePadding:UIEdgeInsetsMake(100, 100, 100, 100) animated:YES];
 }
 
 - (void) focusToAPoint:(MKPointAnnotation *) point {
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 1000, 1000);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(point.coordinate, 500, 500);
     [_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
     [_mapView selectAnnotation:point animated:YES];
+}
+
+- (void) callWSTrackingAllChild {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)));
+    [manager POST:URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            NSArray *arrData = responseObject[0][@"data"];
+            [_arrData removeAllObjects];
+            for (int i = 0; i < [arrData count]; i++) {
+                [_arrData addObject:[arrData objectAtIndex:i]];
+            }
+            if ([_arrData count] > 0) {
+                [self addArrayLocationToMap];
+            } else {
+                [_mapView removeAnnotations:_mapView.annotations];
+            }
+        } else {
+            [_mapView removeAnnotations:_mapView.annotations];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"Error: %@", error.description);
+    }];
+
+}
+
+- (void) showViewLoadListDevice {
+    _viewTblView.hidden = NO;
+    [_tblView reloadData];
+}
+
+- (void) hideViewLoadListDevice {
+    _viewTblView.hidden = YES;
 }
 
 #pragma mark - MAP DELEGATE
@@ -137,4 +183,24 @@
     return pinView;
 }
 
+#pragma mark - TABLE VIEW DELEGATE
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_arrData count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    HistorySelectDevicesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"historySelectDevicesCellId" forIndexPath:indexPath];
+    
+    NSDictionary *objDic = [_arrData objectAtIndex:indexPath.row];
+    cell.lblName.text = objDic[@"fullname"];
+    cell.lblEmail.text = objDic[@"email"];
+    cell.lblPhoneNumber.text = objDic[@"phone_number"];
+    
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self focusToAPoint:(MKPointAnnotation *)[_arrayLocationPins objectAtIndex:indexPath.row]];
+    [self hideViewLoadListDevice];
+}
 @end
