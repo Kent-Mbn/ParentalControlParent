@@ -263,8 +263,10 @@
 }
 
 - (IBAction)actionDownRadius:(id)sender {
-    radius -= radiusUpDown;
-    _lblRadius.text = [NSString stringWithFormat:@"%dm", radius];
+    if (radius > 500) {
+        radius -= radiusUpDown;
+        _lblRadius.text = [NSString stringWithFormat:@"%dm", radius];
+    }
 }
 
 - (IBAction)actionCancelDraw:(id)sender {
