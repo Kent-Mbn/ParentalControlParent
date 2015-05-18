@@ -1223,6 +1223,9 @@
                                         <state key="normal" backgroundImage="button-back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="actionBackDraw:" destination="0gR-fL-SVr" eventType="touchUpInside" id="7T1-cq-SZw"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.090196078430000007" green="0.35686274509999999" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1240,7 +1243,6 @@
                     <navigationItem key="navigationItem" id="xF2-6K-9O8"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="actionBackDraw" destination="kiL-bc-A2J" id="Tx9-Fv-RBF"/>
                         <outlet property="btBackDraw" destination="kiL-bc-A2J" id="cQr-hg-xrE"/>
                         <outlet property="btPolygonType" destination="Yff-lj-l4f" id="Ug5-jG-aIF"/>
                         <outlet property="btRadiusType" destination="N8M-iC-afY" id="xUs-xE-suH"/>

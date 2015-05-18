@@ -274,4 +274,23 @@
     [self removeAllAnnotations];
     [_arrayForPolygon removeAllObjects];
 }
+
+- (IBAction)actionBackDraw:(id)sender {
+    if ([_arrayForPolygon count] > 0) {
+        //If when tap back action draw, map still has 2 points -> remove all
+        if ([_arrayForPolygon count] == 2) {
+            [self actionCancelDraw:nil];
+        } else {
+            //If map has more 2 points -> remove last object and reDraw polygon
+            /* Remove last pin view: remove all and reload */
+            [self removeAllAnnotations];
+            [_arrayForPolygon removeLastObject];
+            for (int i = 0; i < [_arrayForPolygon count]; i++) {
+                CLLocation *pinT = (CLLocation *)[_arrayForPolygon objectAtIndex:i];
+                [self addPinViewToMap:pinT.coordinate];
+            }
+            [self drawPolygon];
+        }
+    }
+}
 @end

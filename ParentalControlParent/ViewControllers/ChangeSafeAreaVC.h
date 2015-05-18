@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
 @property (weak, nonatomic) IBOutlet UIButton *btPolygonType;
 @property (weak, nonatomic) IBOutlet UIView *viewSettingForRadius;
 @property (weak, nonatomic) IBOutlet UILabel *lblRadius;
-@property (weak, nonatomic) IBOutlet UIButton *actionBackDraw;
 @property (weak, nonatomic) IBOutlet UIButton *btBackDraw;
 @property (weak, nonatomic) IBOutlet UIImageView *imgBGButtonChangeType;
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
@@ -46,6 +45,7 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
 - (IBAction)actionUpRadius:(id)sender;
 - (IBAction)actionDownRadius:(id)sender;
 - (IBAction)actionCancelDraw:(id)sender;
+- (IBAction)actionBackDraw:(id)sender;
 
 
 @end
