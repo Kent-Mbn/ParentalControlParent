@@ -35,3 +35,5 @@
 #define MSS_ADD_PAIR_NICK_NAME_INVALID @"Nick name is invalid."
 #define MSS_ADD_PAIR_PHONE_NUMBER_INVALID @"Phone Number is invalid."
 #define MSS_ADD_PAIR_PUSH_NOTIFICATION_MESSAGE @"Request pair"
+
+#define MSS_ADD_SAFE_AREA_FAILED @"Add safe area failed!"

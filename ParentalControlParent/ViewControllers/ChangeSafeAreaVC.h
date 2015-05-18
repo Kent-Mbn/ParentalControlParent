@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Define.h"
+#import "Common.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
 
 typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
     radiusShape = 0,
@@ -17,7 +22,8 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
 
 @interface ChangeSafeAreaVC : UIViewController<MKMapViewDelegate> {
     NSTypeOfSafeArea typeSafeArea;
-    int radius;
+    int radiusCircle;
+    CLLocationCoordinate2D centerPointCircle;
 }
 
 @property (nonatomic, strong) NSMutableArray *arrayForPolygon;

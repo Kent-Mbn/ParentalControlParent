@@ -106,4 +106,34 @@
     return NO;
 }
 
++ (NSString *) returnStringArrayLat:(NSMutableArray *) arrData {
+    NSString *strReturn = @"";
+    if ([arrData count] > 0) {
+        for (int i = 0; i < [arrData count]; i++) {
+            CLLocation *objLocation = [arrData objectAtIndex:i];
+            if (i == [arrData count] - 1) {
+                strReturn = [NSString stringWithFormat:@"%@%@", strReturn, [NSString stringWithFormat:@"%@", @(objLocation.coordinate.latitude)]];
+            } else {
+                strReturn = [NSString stringWithFormat:@"%@%@", strReturn, [NSString stringWithFormat:@"%@;", @(objLocation.coordinate.latitude)]];
+            }
+        }
+    }
+    return strReturn;
+}
+
++ (NSString *) returnStringArrayLong:(NSMutableArray *) arrData {
+    NSString *strReturn = @"";
+    if ([arrData count] > 0) {
+        for (int i = 0; i < [arrData count]; i++) {
+            CLLocation *objLocation = [arrData objectAtIndex:i];
+            if (i == [arrData count] - 1) {
+                strReturn = [NSString stringWithFormat:@"%@%@", strReturn, [NSString stringWithFormat:@"%@", @(objLocation.coordinate.longitude)]];
+            } else {
+                strReturn = [NSString stringWithFormat:@"%@%@", strReturn, [NSString stringWithFormat:@"%@;", @(objLocation.coordinate.longitude)]];
+            }
+        }
+    }
+    return strReturn;
+}
+
 @end

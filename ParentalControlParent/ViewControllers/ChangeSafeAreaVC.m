@@ -32,8 +32,8 @@
     _viewBottombar.backgroundColor = masterColor;
     
     //met
-    radius = 500;
-    _lblRadius.text = [NSString stringWithFormat:@"%dm", radius];
+    radiusCircle = 500;
+    _lblRadius.text = [NSString stringWithFormat:@"%dm", radiusCircle];
     
     [self initTapMap];
     typeSafeArea = radiusShape;
@@ -82,7 +82,8 @@
     CLLocationCoordinate2D touchCoordinate = [_mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
     
     if (typeSafeArea == radiusShape) {
-        [self addCircle:1000 andCircleCoordinate:touchCoordinate];
+        centerPointCircle = touchCoordinate;
+        [self addCircle:radiusCircle andCircleCoordinate:centerPointCircle];
         [self addPinViewToMap:touchCoordinate];
     } else {
         CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:touchCoordinate.latitude longitude:touchCoordinate.longitude];
@@ -177,6 +178,44 @@
     
 }
 
+- (void) callWSSaveSafeArea {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = nil;
+    
+    //Edit parameter for circle of polygon
+    if (typeSafeArea == radiusShape) {
+       // parameter for circle
+        request_param = [@{
+                                                @"device_id":@"3",
+                                                @"latitude":@(centerPointCircle.latitude),
+                                                @"longitude":@(centerPointCircle.longitude),
+                                                @"radius":@(radiusCircle),
+                                                } mutableCopy];
+    } else {
+       //parameter for polygon
+        request_param = [@{
+                                                @"device_id":@"3",
+                                                @"latitude":[Common returnStringArrayLat:_arrayForPolygon],
+                                                @"longitude":[Common returnStringArrayLong:_arrayForPolygon],
+                                                @"radius":@"",
+                                                } mutableCopy];
+
+    }
+    
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_SET_SAFE_AREA));
+    [manager POST:URL_SERVER_API(API_SET_SAFE_AREA) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response LOGIN: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
+}
 
 #pragma mark - MAP DELEGATE
 - (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
@@ -224,8 +263,6 @@
     return pinView;
 }
 
-
-
 #pragma mark - ACTION
 
 - (IBAction)actionBack:(id)sender {
@@ -236,7 +273,11 @@
 }
 
 - (IBAction)actionDone:(id)sender {
-    
+    if ((CLLocationCoordinate2DIsValid(centerPointCircle)  && radiusCircle > 0) || ([_arrayForPolygon count] > 2)) {
+        [self callWSSaveSafeArea];
+    } else {
+        [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }
 }
 
 - (IBAction)actionRadiusType:(id)sender {
@@ -258,14 +299,14 @@
     [_arrayForPolygon removeAllObjects];
 }
 - (IBAction)actionUpRadius:(id)sender {
-    radius += radiusUpDown;
-    _lblRadius.text = [NSString stringWithFormat:@"%dm", radius];
+    radiusCircle += radiusUpDown;
+    _lblRadius.text = [NSString stringWithFormat:@"%dm", radiusCircle];
 }
 
 - (IBAction)actionDownRadius:(id)sender {
-    if (radius > 500) {
-        radius -= radiusUpDown;
-        _lblRadius.text = [NSString stringWithFormat:@"%dm", radius];
+    if (radiusCircle > 500) {
+        radiusCircle -= radiusUpDown;
+        _lblRadius.text = [NSString stringWithFormat:@"%dm", radiusCircle];
     }
 }
 

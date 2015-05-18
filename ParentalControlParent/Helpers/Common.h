@@ -31,4 +31,7 @@
 + (AFHTTPRequestOperationManager *)AFHTTPRequestOperationManagerReturn;
 + (BOOL) validateRespone:(id) respone;
 
++ (NSString *) returnStringArrayLat:(NSMutableArray *) arrData;
++ (NSString *) returnStringArrayLong:(NSMutableArray *) arrData;
+
 @end

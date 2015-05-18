@@ -24,6 +24,8 @@
 #define API_GET_LIST_CHILD(parent_id) [NSString stringWithFormat:@"/user/children/%@", parent_id] 
 #define API_TRACKING_ALL_CHILD(parent_id) [NSString stringWithFormat:@"/history/trackingallchild/%@", parent_id]
 
+#define API_SET_SAFE_AREA @"/safearea/addsafearea"
+
 
 /*
 #define API_GET_USER_POST_LIST @"/user/stat"
