@@ -46,15 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - FUNCTIONS
 - (void) initTapMap {
@@ -187,7 +178,7 @@
     if (typeSafeArea == radiusShape) {
        // parameter for circle
         request_param = [@{
-                                                @"device_id":@"3",
+                                                @"device_id":@(self.device_id),
                                                 @"latitude":@(centerPointCircle.latitude),
                                                 @"longitude":@(centerPointCircle.longitude),
                                                 @"radius":@(radiusCircle),
@@ -195,7 +186,7 @@
     } else {
        //parameter for polygon
         request_param = [@{
-                                                @"device_id":@"3",
+                                                @"device_id":@(self.device_id),
                                                 @"latitude":[Common returnStringArrayLat:_arrayForPolygon],
                                                 @"longitude":[Common returnStringArrayLong:_arrayForPolygon],
                                                 @"radius":@"",

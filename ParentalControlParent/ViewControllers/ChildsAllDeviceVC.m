@@ -33,15 +33,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UIButton *btSender = (UIButton *)sender;
+    if ([[segue identifier] isEqualToString:@"segueToChangeSafeArea"]) {
+        ChangeSafeAreaVC *desVC = [segue destinationViewController];
+        desVC.device_id = btSender.tag;
+    }
 }
-*/
 
 #pragma mark - ACTION
 - (IBAction)actionAddNewDevice:(id)sender {
@@ -49,7 +50,8 @@
 }
 
 - (void) goToChangeSafeArea:(id)sender {
-    [self performSegueWithIdentifier:@"segueToChangeSafeArea" sender:nil];
+    UIButton *btTag = (UIButton *)sender;
+    [self performSegueWithIdentifier:@"segueToChangeSafeArea" sender:btTag];
 }
 
 #pragma mark - FUNCTIONS
@@ -94,6 +96,9 @@
     cell.lblName.text = objDic[@"fullname"];
     cell.lblEmail.text = objDic[@"email"];
     cell.lblPhoneNumber.text = objDic[@"phone_number"];
+    
+    //Button tag = id of device
+    cell.btSetArea.tag = [objDic[@"id"] integerValue];
     [cell.btSetArea addTarget:self action:@selector(goToChangeSafeArea:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }

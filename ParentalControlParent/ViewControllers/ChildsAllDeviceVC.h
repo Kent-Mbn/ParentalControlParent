@@ -15,6 +15,7 @@
 #import "UIKit+AFNetworking.h"
 #import "UserDefault.h"
 #import "DeviceObj.h"
+#import "ChangeSafeAreaVC.h"
 
 @interface ChildsAllDeviceVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblView;

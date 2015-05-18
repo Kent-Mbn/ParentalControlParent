@@ -24,7 +24,10 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
     NSTypeOfSafeArea typeSafeArea;
     int radiusCircle;
     CLLocationCoordinate2D centerPointCircle;
+    int device_id;
 }
+
+@property(nonatomic) int device_id;
 
 @property (nonatomic, strong) NSMutableArray *arrayForPolygon;
 //Polyline
