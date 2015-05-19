@@ -43,3 +43,6 @@
 
 #define MSS_CHANGE_PASS_FAILED @"Change password failed!"
 #define MSS_CHANGE_PASS_INPUT_INVALID @"Input invalid!"
+
+#define MSS_EDIT_PROFILE_FAILED @""
+#define MSS_EDIT_PROFILE_INPUT_INVALID @"Input invalid!"

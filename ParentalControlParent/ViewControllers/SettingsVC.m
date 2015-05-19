@@ -201,6 +201,7 @@
         case 0:
         {
             if (buttonIndex == 1) {
+                [UserDefault clearInfo];
                 [APP_DELEGATE setRootViewLogoutWithCompletion:^{
                     
                 }];

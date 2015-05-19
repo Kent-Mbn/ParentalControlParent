@@ -11,6 +11,7 @@
 #import "SettingsCell.h"
 #import "Common.h"
 #import "AppDelegate.h"
+#import "UserDefault.h"
 
 typedef NS_ENUM(NSInteger, TypeOfMap) {
     standanrd = 0,

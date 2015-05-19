@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "Define.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
+#import "Common.h"
 
-@interface MyProfileVC : UIViewController
+@interface MyProfileVC : UIViewController<UITextFieldDelegate>
+
 - (IBAction)actionBack:(id)sender;
+- (IBAction)actionDone:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
+@property (weak, nonatomic) IBOutlet UITextField *tfEmail;
+@property (weak, nonatomic) IBOutlet UITextField *tfName;
+@property (weak, nonatomic) IBOutlet UITextField *tfPhoneNum;
 
 @end

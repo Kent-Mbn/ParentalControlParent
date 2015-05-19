@@ -35,8 +35,62 @@
 }
 */
 
+#pragma mark - FUNCTIONS
+- (void) callWSEditProfile {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            @"id":[UserDefault user].parent_id,
+                                            @"email":_tfEmail.text,
+                                            @"fullname":_tfName.text,
+                                            @"phone_number":_tfPhoneNum,
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_EDIT_PROFILE));
+    [manager POST:URL_SERVER_API(API_EDIT_PROFILE) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_EDIT_PROFILE_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_EDIT_PROFILE_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
+}
+
+- (BOOL) validData {
+    if (_tfEmail.text.length == 0) {
+        return NO;
+    }
+    if (![Common isValidEmail:_tfEmail.text]) {
+        return NO;
+    }
+    if (_tfName.text.length == 0) {
+        return NO;
+    }
+    if (_tfPhoneNum.text.length == 0) {
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark _ TEXTFIELD DELEGATE
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 #pragma mark - ACTION
 - (IBAction)actionBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)actionDone:(id)sender {
+    if ([self validData]) {
+        [self callWSEditProfile];
+    }
 }
 @end
