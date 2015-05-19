@@ -40,3 +40,6 @@
 
 #define MSS_EDIT_DEVICE_FAILED @"Edit device failed!"
 #define MSS_DELETE_DEVICE_FAILED @"Delete device failed!"
+
+#define MSS_CHANGE_PASS_FAILED @"Change password failed!"
+#define MSS_CHANGE_PASS_INPUT_INVALID @"Input invalid!"

@@ -29,6 +29,8 @@
 #define API_EDIT_DEVICE @"/device/edit"
 #define API_DELETE_DEVICE(device_id) [NSString stringWithFormat:@"/device/delete/%@", device_id]
 
+#define API_CHANGE_PASS_WORD @"/user/changepassword"
+
 
 /*
 #define API_GET_USER_POST_LIST @"/user/stat"
