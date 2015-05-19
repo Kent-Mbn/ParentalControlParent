@@ -169,18 +169,21 @@
                 case 0:
                 {
                     typeOfMap = standanrd;
+                    [[UserDefault user] setType_map:@"standanrd"];
                 }
                 break;
                     
                 case 1:
                 {
                     typeOfMap = hybrid;
+                    [[UserDefault user] setType_map:@"hybrid"];
                 }
                 break;
                     
                 case 2:
                 {
                     typeOfMap = satellite;
+                    [[UserDefault user] setType_map:@"satellite"];
                 }
                 break;
                     

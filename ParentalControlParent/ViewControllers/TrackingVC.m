@@ -29,6 +29,15 @@
     [_viewTblView setBackgroundColor:colorBgViewTbl];
     
     [self hideViewLoadListDevice];
+    
+    NSString *strTypeMap = [UserDefault user].type_map;
+    if ([strTypeMap isEqualToString:@"hybrid"]) {
+        _mapView.mapType = MKMapTypeHybrid;
+    } else if ([strTypeMap isEqualToString:@"satellite"]) {
+        _mapView.mapType = MKMapTypeSatellite;
+    } else {
+        _mapView.mapType = MKMapTypeStandard;
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {

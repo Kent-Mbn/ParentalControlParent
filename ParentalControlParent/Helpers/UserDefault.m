@@ -28,6 +28,7 @@ static UserDefault *globalObject;
         self.token_device = [aDecoder decodeObjectForKey:@"token_device"];
         self.full_name = [aDecoder decodeObjectForKey:@"full_name"];
         self.phone_number = [aDecoder decodeObjectForKey:@"phone_number"];
+        self.type_map = [aDecoder decodeObjectForKey:@"type_map"];
     }
     
     return self;
@@ -40,6 +41,7 @@ static UserDefault *globalObject;
     [aCoder encodeObject:self.token_device forKey:@"token_device"];
     [aCoder encodeObject:self.full_name forKey:@"full_name"];
     [aCoder encodeObject:self.phone_number forKey:@"phone_number"];
+    [aCoder encodeObject:self.type_map forKey:@"type_map"];
 }
 
 - (void) updateUserDefault
@@ -56,6 +58,7 @@ static UserDefault *globalObject;
     user.token_device = nil;
     user.full_name = nil;
     user.phone_number = nil;
+    user.type_map = nil;
     [user update];
 }
 

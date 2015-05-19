@@ -15,6 +15,7 @@
 @property(nonatomic,strong) NSString *email;
 @property(nonatomic,strong) NSString *full_name;
 @property(nonatomic,strong) NSString *phone_number;
+@property(nonatomic,strong) NSString *type_map;
 
 + (UserDefault *) user;
 - (void) update;
