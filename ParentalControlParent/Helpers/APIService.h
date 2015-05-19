@@ -26,6 +26,9 @@
 
 #define API_SET_SAFE_AREA @"/safearea/addsafearea"
 
+#define API_EDIT_DEVICE @"/device/edit"
+#define API_DELETE_DEVICE(device_id) [NSString stringWithFormat:@"/device/delete/%@", device_id]
+
 
 /*
 #define API_GET_USER_POST_LIST @"/user/stat"

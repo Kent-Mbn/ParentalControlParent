@@ -37,3 +37,6 @@
 #define MSS_ADD_PAIR_PUSH_NOTIFICATION_MESSAGE @"Request pair"
 
 #define MSS_ADD_SAFE_AREA_FAILED @"Add safe area failed!"
+
+#define MSS_EDIT_DEVICE_FAILED @"Edit device failed!"
+#define MSS_DELETE_DEVICE_FAILED @"Delete device failed!"

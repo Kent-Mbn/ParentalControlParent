@@ -8,10 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "Define.h"
+#import "APIService.h"
+#import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
+#import "Common.h"
 
-@interface ChildsEditDeviceVC : UIViewController
+@interface ChildsEditDeviceVC : UIViewController<UITextFieldDelegate>
 - (IBAction)actionBack:(id)sender;
 - (IBAction)actionDone:(id)sender;
+- (IBAction)actionDelete:(id)sender;
+- (IBAction)actionHideKeyboard:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *tfEmail;
+@property (weak, nonatomic) IBOutlet UITextField *tfFullName;
+@property (nonatomic, strong) NSString *device_id;
+
+
+
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 
 @end
