@@ -22,6 +22,11 @@
     _viewTopbar.backgroundColor = masterColor;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    NSString *strCurrentDate = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
+    [self callWSGetAllHistories:@"3" andCreatedTime:strCurrentDate];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -64,4 +69,26 @@
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element {
     NSLog(@"Click here!");
 }
+
+- (void) callWSGetAllHistories:(NSString *) device_id andCreatedTime:(NSString *)created_time {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            @"device_id":device_id,
+                                            @"created_at":created_time,
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_GET_HISTORIES([UserDefault user].parent_id)));
+    [manager POST:URL_SERVER_API(API_GET_HISTORIES([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            } else {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"Error: %@", error.description);
+    }];
+}
+
 @end

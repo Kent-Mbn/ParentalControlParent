@@ -10,11 +10,19 @@
 
 //SERVER OF ODC TEAM
 
+
 #define SERVER_IP   @"http://117.3.65.103/parental-control/public"
 #define SERVER_PORT @"80"
 
+
+//#define SERVER_IP   @"http://172.20.2.19"
+//#define SERVER_PORT @"80"
+
 #define URL_SERVER_API_FULL [NSString stringWithFormat:@"%@", SERVER_IP]
 #define URL_SERVER_API(method) [NSString stringWithFormat:@"%@%@",URL_SERVER_API_FULL,method]
+
+//#define URL_SERVER_API_FULL [NSString stringWithFormat:@"%@:%@", SERVER_IP, SERVER_PORT]
+//#define URL_SERVER_API(method) [NSString stringWithFormat:@"%@%@",URL_SERVER_API_FULL,method]
 
 #define API_USER_REGISTER @"/user/register"
 #define API_USER_LOGIN @"/user/login"
@@ -31,6 +39,8 @@
 
 #define API_CHANGE_PASS_WORD @"/user/changepassword"
 #define API_EDIT_PROFILE @"/user/updateprofile"
+
+#define API_GET_HISTORIES(parent_id) [NSString stringWithFormat:@"/history/gethistories/%@", parent_id]
 
 
 /*
