@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
     int radiusCircle;
     CLLocationCoordinate2D centerPointCircle;
     int device_id;
+    
 }
 
 @property(nonatomic) int device_id;

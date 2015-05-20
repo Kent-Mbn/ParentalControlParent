@@ -82,7 +82,17 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
-            } else {
+            NSArray *arrData = responseObject[0][@"data"];
+            if ([arrData count] > 0) {
+                NSMutableArray *arrPoints = [[NSMutableArray alloc] init];
+                for (int i = 0; i < [arrData count]; i++) {
+                    NSDictionary *dicPoint = arrData[i];
+                    CLLocation *locaPoint = [[CLLocation alloc] initWithLatitude:[dicPoint[@"latitude"] doubleValue] longitude:[dicPoint[@"longitude"] doubleValue]];
+                    [arrPoints addObject:locaPoint];
+                }
+                [self drawHistory:arrPoints];
+            }
+        } else {
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -90,5 +100,44 @@
         NSLog(@"Error: %@", error.description);
     }];
 }
+
+- (void) drawHistory:(NSMutableArray *)arrayPoints {
+    if ([arrayPoints count] > 0) {
+        for (int i = 0; i < [arrayPoints count]; i++) {
+            CLLocation *locationTemp1;
+            CLLocation *locationTemp2;
+            locationTemp1 = (CLLocation *)[arrayPoints objectAtIndex:i];
+            locationTemp2 = (CLLocation *)[arrayPoints objectAtIndex:i];
+            [self drawLine:locationTemp1.coordinate andSecondPoint:locationTemp2.coordinate];
+        }
+    }
+}
+
+- (void) drawLine:(CLLocationCoordinate2D) firstPoint andSecondPoint:(CLLocationCoordinate2D) secondPoint {
+    
+    // remove polyline if one exists
+    [_mapView removeAnnotations:[_mapView annotations]];
+    
+    //Create an array of coordinates
+    CLLocationCoordinate2D coordinates[2];
+    coordinates[0] = firstPoint;
+    coordinates[1] = secondPoint;
+    
+    // Create a polyline with array of coordinates
+    MKPolyline *polyLineFirst = [MKPolyline polylineWithCoordinates:coordinates count:2];
+    
+    // Create a polyline view
+    _polylineView = [[MKPolylineView alloc] initWithPolyline:polyLineFirst];
+    _polylineView.strokeColor = [UIColor redColor];
+    _polylineView.lineWidth = 5;
+
+    [_mapView addOverlay:polyLineFirst];
+}
+
+#pragma mark - MAP VIEW DELEGATE
+- (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
+    return _polylineView;
+}
+
 
 @end

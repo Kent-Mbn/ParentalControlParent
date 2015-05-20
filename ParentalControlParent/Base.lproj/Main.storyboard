@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pi6-DZ-RkI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Pi6-DZ-RkI">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--Login-->
@@ -145,6 +145,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="DrT-3B-YRD">
                                 <rect key="frame" x="0.0" y="65" width="320" height="454"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AQQ-l7-FgG" id="Y4q-F3-tda"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" id="BRj-1n-gCo">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
@@ -188,6 +191,7 @@
                     </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="mapView" destination="DrT-3B-YRD" id="AwE-kO-DfX"/>
                         <outlet property="viewTopbar" destination="BRj-1n-gCo" id="xt1-Fp-CTn"/>
                         <segue destination="7Gw-h4-nzt" kind="modal" identifier="sugueToListDeviceFromHistory" id="9zF-ba-VzM"/>
                     </connections>
@@ -1478,6 +1482,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="UBI-7F-zFk"/>
+        <segue reference="9zF-ba-VzM"/>
     </inferredMetricsTieBreakers>
 </document>

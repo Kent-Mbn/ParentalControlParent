@@ -18,9 +18,12 @@
 #import "APIService.h"
 #import "Common.h"
 
-@interface HistoryMainVC : UIViewController
+@interface HistoryMainVC : UIViewController<MKMapViewDelegate>
 @property (nonatomic, strong) AbstractActionSheetPicker *actionDatePicker;
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (nonatomic, strong) MKPolylineView *polylineView;
 
 - (IBAction)actionSelectDevice:(id)sender;
 - (IBAction)actionSelectDate:(id)sender;
