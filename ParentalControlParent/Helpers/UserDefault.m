@@ -27,6 +27,7 @@ static UserDefault *globalObject;
         self.email = [aDecoder decodeObjectForKey:@"email"];
         self.token_device = [aDecoder decodeObjectForKey:@"token_device"];
         self.full_name = [aDecoder decodeObjectForKey:@"full_name"];
+        self.password = [aDecoder decodeObjectForKey:@"password"];
         self.phone_number = [aDecoder decodeObjectForKey:@"phone_number"];
         self.type_map = [aDecoder decodeObjectForKey:@"type_map"];
     }
@@ -40,6 +41,7 @@ static UserDefault *globalObject;
     [aCoder encodeObject:self.email forKey:@"email"];
     [aCoder encodeObject:self.token_device forKey:@"token_device"];
     [aCoder encodeObject:self.full_name forKey:@"full_name"];
+    [aCoder encodeObject:self.password forKey:@"password"];
     [aCoder encodeObject:self.phone_number forKey:@"phone_number"];
     [aCoder encodeObject:self.type_map forKey:@"type_map"];
 }
@@ -57,6 +59,7 @@ static UserDefault *globalObject;
     user.email = nil;
     user.token_device = nil;
     user.full_name = nil;
+    user.password = nil;
     user.phone_number = nil;
     user.type_map = nil;
     [user update];

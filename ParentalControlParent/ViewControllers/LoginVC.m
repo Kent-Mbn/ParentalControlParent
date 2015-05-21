@@ -96,6 +96,7 @@
             [[UserDefault user] setEmail:userDic[@"user"]];
             [[UserDefault user] setFull_name:userDic[@"fullname"]];
             [[UserDefault user] setParent_id:userDic[@"id"]];
+            [[UserDefault user] setPassword:_tfPassword.text];
             [[UserDefault user] setPhone_number:userDic[@"phone_number"]];
             [[UserDefault user] setToken_device:[Common getDeviceToken]];
             

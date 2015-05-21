@@ -48,6 +48,7 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
+            [[UserDefault user] setPassword:_tfNewPass.text];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [Common showAlertView:APP_NAME message:MSS_CHANGE_PASS_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
@@ -67,6 +68,9 @@
         return NO;
     }
     if (_tfOldPass.text.length == 0) {
+        return NO;
+    }
+    if (![_tfOldPass.text isEqualToString:[UserDefault user].password]) {
         return NO;
     }
     if (![_tfNewPass.text isEqualToString:_tfConfirmPass.text]) {
