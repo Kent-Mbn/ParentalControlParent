@@ -16,8 +16,11 @@
 #import "UserDefault.h"
 #import "DeviceObj.h"
 #import "ChangeSafeAreaVC.h"
+#import "ChildsEditDeviceVC.h"
 
-@interface ChildsAllDeviceVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ChildsAllDeviceVC : UIViewController<UITableViewDataSource, UITableViewDelegate> {
+    int indexSelected;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;

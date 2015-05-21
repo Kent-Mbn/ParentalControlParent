@@ -18,11 +18,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewTopbar.backgroundColor = masterColor;
+    
+    NSLog(@"dic obj: %@", _deviceObj);
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) initData {
+    _tfEmail.text = _deviceObj[@"email"];
+    _tfFullName.text = _deviceObj[@"fullname"];
 }
 
 /*
@@ -40,6 +48,7 @@
     [Common showLoadingViewGlobal:nil];
     AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
     NSMutableDictionary *request_param = [@{
+                                            @"id":_deviceObj[@"id"],
                                             @"email":_tfEmail.text,
                                             @"fullname":_tfFullName.text,
                                             } mutableCopy];
@@ -64,8 +73,8 @@
     NSMutableDictionary *request_param = [@{
                                             
                                             } mutableCopy];
-    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_DELETE_DEVICE(self.device_id)));
-    [manager POST:URL_SERVER_API(API_DELETE_DEVICE(self.device_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_DELETE_DEVICE(_deviceObj[@"id"])));
+    [manager GET:URL_SERVER_API(API_DELETE_DEVICE(_deviceObj[@"id"])) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
@@ -76,6 +85,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideLoadingViewGlobal];
         [Common showAlertView:APP_NAME message:MSS_DELETE_DEVICE_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        NSLog(@"Error: %@", error.description);
     }];
 }
 
@@ -98,9 +108,7 @@
 }
 
 - (IBAction)actionDelete:(id)sender {
-    if (self.device_id.length > 0) {
-        [self callWSDeleteDevice];
-    }
+    [self callWSDeleteDevice];
 }
 
 - (IBAction)actionHideKeyboard:(id)sender {

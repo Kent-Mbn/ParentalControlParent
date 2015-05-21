@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfFullName;
 @property (nonatomic, strong) NSString *device_id;
 
-
+@property (nonatomic, strong) NSDictionary *deviceObj;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 

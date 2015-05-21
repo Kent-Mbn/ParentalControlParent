@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _viewTopbar.backgroundColor = masterColor;
+    indexSelected = 0;
     
     //Hide navigation bar
     [self.navigationController setNavigationBarHidden:YES];
@@ -41,6 +42,11 @@
     if ([[segue identifier] isEqualToString:@"segueToChangeSafeArea"]) {
         ChangeSafeAreaVC *desVC = [segue destinationViewController];
         desVC.device_id = btSender.tag;
+    }
+    
+    if ([[segue identifier] isEqualToString:@"segueToEditDevice"]) {
+        ChildsEditDeviceVC *desVC = [segue destinationViewController];
+        desVC.deviceObj = [_arrayData objectAtIndex:indexSelected];
     }
 }
 
@@ -104,6 +110,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    indexSelected = indexPath.row;
     [self performSegueWithIdentifier:@"segueToEditDevice" sender:nil];
 }
 
