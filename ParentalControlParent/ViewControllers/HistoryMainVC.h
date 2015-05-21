@@ -17,13 +17,26 @@
 #import "UserDefault.h"
 #import "APIService.h"
 #import "Common.h"
+#import "HistorySelectDevicesCell.h"
 
-@interface HistoryMainVC : UIViewController<MKMapViewDelegate>
+@interface HistoryMainVC : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate>
+
 @property (nonatomic, strong) AbstractActionSheetPicker *actionDatePicker;
+@property (nonatomic, strong) NSString *strCurrentTime;
+@property (nonatomic, strong) NSString *strIdChild;
+
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+@property (nonatomic, strong) MKPolyline *polyline;
 @property (nonatomic, strong) MKPolylineView *polylineView;
+
+@property (weak, nonatomic) IBOutlet UIView *viewTblView;
+@property (weak, nonatomic) IBOutlet UITableView *tblView;
+
+@property (strong, nonatomic) NSMutableArray *arrData;
+
+- (IBAction)actionHideViewTbl:(id)sender;
 
 - (IBAction)actionSelectDevice:(id)sender;
 - (IBAction)actionSelectDate:(id)sender;

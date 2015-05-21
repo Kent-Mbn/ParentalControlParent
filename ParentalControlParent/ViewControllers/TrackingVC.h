@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 @property (strong, nonatomic) NSMutableArray *arrData;
 @property (strong , nonatomic) NSMutableArray *arrayLocationPins;
+
 @property (weak, nonatomic) IBOutlet UIView *viewTblView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
 - (IBAction)actionHideViewTbl:(id)sender;
