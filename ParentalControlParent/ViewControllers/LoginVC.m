@@ -93,7 +93,7 @@
             //Save information
             NSArray *arrRespone = (NSArray *) responseObject;
             NSDictionary *userDic = arrRespone[1][@"user"];
-            [[UserDefault user] setEmail:userDic[@"user"]];
+            [[UserDefault user] setEmail:userDic[@"email"]];
             [[UserDefault user] setFull_name:userDic[@"fullname"]];
             [[UserDefault user] setParent_id:userDic[@"id"]];
             [[UserDefault user] setPassword:_tfPassword.text];

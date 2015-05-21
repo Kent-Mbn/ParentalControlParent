@@ -1450,7 +1450,7 @@
                     <navigationItem key="navigationItem" id="MvF-mz-8zM"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="tfEmail" destination="RHL-mC-MpR" id="5Gx-72-Mew"/>
+                        <outlet property="tfEmail" destination="RHL-mC-MpR" id="5V6-3x-1qK"/>
                         <outlet property="tfName" destination="wj3-Zy-3XT" id="q1s-0p-Sxc"/>
                         <outlet property="tfPhoneNum" destination="up5-kb-dZk" id="flG-sr-Zs1"/>
                         <outlet property="viewTopbar" destination="TVF-IO-7wl" id="I22-TV-9SA"/>
