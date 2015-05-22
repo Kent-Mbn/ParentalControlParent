@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "UIKit+AFNetworking.h"
 #import "Define.h"
+#import "UserDefault.h"
 
 @interface Common : NSObject
 
@@ -34,6 +35,7 @@
 + (NSString *) returnStringArrayLat:(NSMutableArray *) arrData;
 + (NSString *) returnStringArrayLong:(NSMutableArray *) arrData;
 + (float) calDistanceTwoCoordinate:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint;
++ (void) setMapTypeGlobal:(MKMapView *)mapView;
 
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;

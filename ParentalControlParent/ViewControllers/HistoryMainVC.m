@@ -21,7 +21,7 @@
     self.navigationController.navigationBarHidden = YES;
     _viewTopbar.backgroundColor = masterColor;
     _strCurrentTime = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-    
+    [Common setMapTypeGlobal:_mapView];
     _arrData = [[NSMutableArray alloc] init];
     [Common roundView:_tblView andRadius:10];
     UIColor *colorBgViewTbl = [[UIColor blackColor] colorWithAlphaComponent:0.5f];

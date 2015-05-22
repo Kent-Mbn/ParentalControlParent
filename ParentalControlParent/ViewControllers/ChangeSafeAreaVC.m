@@ -35,6 +35,8 @@
     radiusCircle = 500;
     _lblRadius.text = [NSString stringWithFormat:@"%dm", radiusCircle];
     
+    [Common setMapTypeGlobal:_mapView];
+    
     [self initTapMap];
     typeSafeArea = radiusShape;
     [self setStatusBottomBar:typeSafeArea];

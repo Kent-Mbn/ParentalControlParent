@@ -143,6 +143,21 @@
     return (float)dist;
 }
 
++ (void) setMapTypeGlobal:(MKMapView *)mapView {
+    NSString *strMaptype = [UserDefault user].type_map;
+    if (strMaptype.length > 0) {
+        if ([strMaptype isEqualToString:@"standanrd"]) {
+            mapView.mapType = MKMapTypeStandard;
+        }
+        if ([strMaptype isEqualToString:@"hybrid"]) {
+            mapView.mapType = MKMapTypeHybrid;
+        }
+        if ([strMaptype isEqualToString:@"satellite"]) {
+            mapView.mapType = MKMapTypeSatellite;
+        }
+    }
+}
+
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint {
     double areaReturn = 0.0f;
