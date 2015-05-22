@@ -33,5 +33,10 @@
 
 + (NSString *) returnStringArrayLat:(NSMutableArray *) arrData;
 + (NSString *) returnStringArrayLong:(NSMutableArray *) arrData;
++ (float) calDistanceTwoCoordinate:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint;
+
+#pragma mark - Algorthim calculate area of polygon and circle
++ (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;
++ (double) areaOfPolygon:(NSMutableArray *) arrPoints;
 
 @end

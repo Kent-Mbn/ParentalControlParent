@@ -19,14 +19,19 @@
 
 
 @interface TrackingVC : UIViewController<MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-- (IBAction)actionListDevice:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 @property (strong, nonatomic) NSMutableArray *arrData;
 @property (strong , nonatomic) NSMutableArray *arrayLocationPins;
 
 @property (weak, nonatomic) IBOutlet UIView *viewTblView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
+
+@property (nonatomic) NSTimer *timerTrackingChildrent;
+
+- (IBAction)actionListDevice:(id)sender;
 - (IBAction)actionHideViewTbl:(id)sender;
 
 @end

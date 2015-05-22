@@ -42,11 +42,17 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     NSLog(@"Parent Id: %@", [UserDefault user].parent_id);
+    [self callWSTrackingAllChild];
+    [self startTimerTrackingChildrent];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [self callWSTrackingAllChild];
+    
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [self stopTimerTrackingChildrent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,6 +166,22 @@
 
 - (void) hideViewLoadListDevice {
     _viewTblView.hidden = YES;
+}
+
+- (void) stopTimerTrackingChildrent {
+    if (_timerTrackingChildrent) {
+        [_timerTrackingChildrent invalidate];
+        _timerTrackingChildrent = nil;
+    }
+}
+
+- (void) startTimerTrackingChildrent {
+    [self stopTimerTrackingChildrent];
+    _timerTrackingChildrent = [NSTimer timerWithTimeInterval:timeTrackingChildrent target:self selector:@selector(endTimerTrackingChildrent) userInfo:nil repeats:YES];
+}
+
+- (void) endTimerTrackingChildrent {
+    [self callWSTrackingAllChild];
 }
 
 #pragma mark - MAP DELEGATE

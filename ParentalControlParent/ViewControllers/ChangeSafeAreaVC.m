@@ -265,7 +265,12 @@
 
 - (IBAction)actionDone:(id)sender {
     if ((CLLocationCoordinate2DIsValid(centerPointCircle)  && radiusCircle > 0) || ([_arrayForPolygon count] > 2)) {
-        [self callWSSaveSafeArea];
+        NSLog(@"AREA: %f", [Common areaOfPolygon:_arrayForPolygon]);
+        if ((typeSafeArea == polygonShape) && ([Common areaOfPolygon:_arrayForPolygon] < minOfAreaPolygon)) {
+            [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_TOO_SMALL delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        } else {
+            [self callWSSaveSafeArea];
+        }
     } else {
         [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
     }

@@ -10,11 +10,16 @@
 #define masterColor [UIColor colorWithRed:49/255.0f green:144/255.0f blue:181/255.0f alpha:1.0]
 #define APP_DELEGATE (AppDelegate *)[UIApplication sharedApplication].delegate
 
+#define timeTrackingChildrent 10
+
 #pragma mark - CODE RESPONE FROM SERVER
 #define CODE_RESPONE_SUCCESS 0
 
 #pragma mark - NAME
 #define APP_NAME @"Parent App"
+
+//m2
+#define minOfAreaPolygon 500000
 
 
 #pragma mark - MESSAGE
@@ -37,6 +42,7 @@
 #define MSS_ADD_PAIR_PUSH_NOTIFICATION_MESSAGE @"Request pair"
 
 #define MSS_ADD_SAFE_AREA_FAILED @"Add safe area failed!"
+#define MSS_ADD_SAFE_AREA_TOO_SMALL @"The safe area is too small! Please set other safe area!"
 
 #define MSS_EDIT_DEVICE_FAILED @"Edit device failed!"
 #define MSS_DELETE_DEVICE_FAILED @"Delete device failed!"
