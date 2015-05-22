@@ -47,6 +47,12 @@ typedef NS_ENUM(NSInteger, NSTypeOfSafeArea) {
 @property (weak, nonatomic) IBOutlet UIImageView *imgBGButtonChangeType;
 @property (weak, nonatomic) IBOutlet UIView *viewTopbar;
 @property (weak, nonatomic) IBOutlet UIView *viewBottombar;
+@property (weak, nonatomic) IBOutlet UIButton *btPlus;
+@property (weak, nonatomic) IBOutlet UIButton *btMinus;
+
+//Timer press plus and minus
+@property (nonatomic) NSTimer *timerPlus;
+@property (nonatomic) NSTimer *timerMinus;
 
 - (IBAction)actionBack:(id)sender;
 - (IBAction)actionDone:(id)sender;

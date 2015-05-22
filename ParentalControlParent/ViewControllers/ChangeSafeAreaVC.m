@@ -36,6 +36,7 @@
     _lblRadius.text = [NSString stringWithFormat:@"%dm", radiusCircle];
     
     [Common setMapTypeGlobal:_mapView];
+    [self setEventLongPress];
     
     [self initTapMap];
     typeSafeArea = radiusShape;
@@ -50,6 +51,15 @@
 
 
 #pragma mark - FUNCTIONS
+- (void) setEventLongPress {
+    UILongPressGestureRecognizer *longPressPlus = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(actionLongPressPlus:)];
+    [_btPlus addGestureRecognizer:longPressPlus];
+    
+    UILongPressGestureRecognizer *longPressMinus = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(actionLongPressMinus:)];
+    [_btMinus addGestureRecognizer:longPressMinus];
+    
+}
+
 - (void) initTapMap {
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapMap:)];
     tapGes.numberOfTapsRequired = 1;
@@ -210,6 +220,38 @@
     }];
 }
 
+- (void) stopTimerPlus {
+    if (_timerPlus) {
+        [_timerPlus invalidate];
+        _timerPlus = nil;
+    }
+}
+
+- (void) stopTimerMinus {
+    if (_timerMinus) {
+        [_timerMinus invalidate];
+        _timerMinus = nil;
+    }
+}
+
+- (void) startTimerPlus {
+    [self stopTimerPlus];
+    _timerPlus = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(endTimerPlus) userInfo:nil repeats:YES];
+}
+
+- (void) startTimerMinus {
+    [self stopTimerMinus];
+    _timerMinus = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(endTimerMinus) userInfo:nil repeats:YES];
+}
+
+- (void) endTimerPlus{
+    [self actionUpRadius:nil];
+}
+
+- (void) endTimerMinus{
+    [self actionDownRadius:nil];
+}
+
 #pragma mark - MAP DELEGATE
 - (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     if (typeSafeArea == radiusShape) {
@@ -332,4 +374,27 @@
         }
     }
 }
+
+-(void) actionLongPressPlus:(id) sender {
+    UILongPressGestureRecognizer *gesture = (UILongPressGestureRecognizer *)sender;
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [self startTimerPlus];
+    }
+    
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self stopTimerPlus];
+    }
+}
+
+-(void) actionLongPressMinus:(id) sender {
+    UILongPressGestureRecognizer *gesture = (UILongPressGestureRecognizer *)sender;
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [self startTimerMinus];
+    }
+    
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self stopTimerMinus];
+    }
+}
+
 @end

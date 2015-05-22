@@ -1343,6 +1343,8 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btBackDraw" destination="kiL-bc-A2J" id="cQr-hg-xrE"/>
+                        <outlet property="btMinus" destination="d0f-Rc-wmF" id="XSP-B0-57y"/>
+                        <outlet property="btPlus" destination="90D-hz-bAw" id="NXu-RA-SHf"/>
                         <outlet property="btPolygonType" destination="Yff-lj-l4f" id="Ug5-jG-aIF"/>
                         <outlet property="btRadiusType" destination="N8M-iC-afY" id="xUs-xE-suH"/>
                         <outlet property="imgBGButtonChangeType" destination="BiX-cZ-0iA" id="nMS-OY-rLC"/>

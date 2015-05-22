@@ -169,7 +169,7 @@
 
 - (void) startTimerTrackingChildrent {
     [self stopTimerTrackingChildrent];
-    _timerTrackingChildrent = [NSTimer timerWithTimeInterval:timeTrackingChildrent target:self selector:@selector(endTimerTrackingChildrent) userInfo:nil repeats:YES];
+    _timerTrackingChildrent = [NSTimer scheduledTimerWithTimeInterval:timeTrackingChildrent target:self selector:@selector(endTimerTrackingChildrent) userInfo:nil repeats:YES];
 }
 
 - (void) endTimerTrackingChildrent {

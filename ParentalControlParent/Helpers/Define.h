@@ -19,7 +19,7 @@
 #define APP_NAME @"Parent App"
 
 //m2
-#define minOfAreaPolygon 500000
+#define minOfAreaPolygon 100000
 
 
 #pragma mark - MESSAGE
