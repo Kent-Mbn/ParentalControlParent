@@ -29,11 +29,10 @@
     [_viewTblView setBackgroundColor:colorBgViewTbl];
     
     [self hideViewLoadListDevice];
-    [Common setMapTypeGlobal:_mapView];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    NSLog(@"Parent Id: %@", [UserDefault user].parent_id);
+    [Common setMapTypeGlobal:_mapView];
     [self callWSTrackingAllChild];
     [self startTimerTrackingChildrent];
 }
@@ -183,6 +182,8 @@
     MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
     if (!pinView) {
         MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        
+        /*
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(-10, 0, 20, 32)];
         imageV.image = [UIImage imageNamed:@"ic_device_pin.png"];
         if (annotation == mapView.userLocation){
@@ -194,14 +195,19 @@
             customPinView.image = [UIImage imageNamed:@""];
             //customPinView.pinColor = MKPinAnnotationColorRed;
         }
+         */
+        customPinView.pinColor = MKPinAnnotationColorRed;
         customPinView.animatesDrop = NO;
         customPinView.canShowCallout = YES;
         return customPinView;
         
-    } else {
+    }
+    /*
+    else {
         pinView.centerOffset = CGPointMake(0, -35 / 2);
         pinView.annotation = annotation;
     }
+     */
     
     return pinView;
 }
