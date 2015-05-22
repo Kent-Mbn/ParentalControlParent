@@ -28,7 +28,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="c3e-LI-Yzh">
-                                        <rect key="frame" x="16" y="63" width="288" height="282"/>
+                                        <rect key="frame" x="16" y="63" width="288" height="263"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parental Control" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DBR-6P-38y">
@@ -39,7 +39,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="gcsvn123" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" id="GyU-QW-ihc">
-                                                <rect key="frame" x="15" y="125" width="257" height="30"/>
+                                                <rect key="frame" x="15" y="131" width="257" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -48,15 +48,8 @@
                                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="6EN-GI-oek"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Automatically" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Ok-vp-bO5">
-                                                <rect key="frame" x="47" y="170" width="200" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rWa-A9-iEf">
-                                                <rect key="frame" x="15" y="204" width="257" height="37"/>
+                                                <rect key="frame" x="15" y="184" width="257" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" backgroundImage="button-login.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +59,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lcY-7s-PNh">
-                                                <rect key="frame" x="15" y="245" width="141" height="30"/>
+                                                <rect key="frame" x="15" y="227" width="141" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Forgot Password ?">
@@ -79,7 +72,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5E8-rU-XMW">
-                                                <rect key="frame" x="200" y="245" width="72" height="30"/>
+                                                <rect key="frame" x="200" y="227" width="72" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <state key="normal" title="Register">
@@ -90,13 +83,6 @@
                                                     <action selector="actionRegister:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zh5-Tq-Xo7"/>
                                                     <segue destination="9iB-hK-vjN" kind="push" id="Xnx-QE-gAr"/>
                                                 </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YtO-Fr-96A">
-                                                <rect key="frame" x="15" y="168" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" backgroundImage="checkbox-tick.png">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test1@gmail.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" id="iK0-Ps-JCU">
                                                 <rect key="frame" x="15" y="87" width="257" height="30"/>
@@ -123,7 +109,6 @@
                     <navigationItem key="navigationItem" title="Login" id="2v7-r2-rlz"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="btCheckBox" destination="YtO-Fr-96A" id="m9e-h5-6FJ"/>
                         <outlet property="scrBG" destination="Igq-DM-6FU" id="PWQ-QD-pjp"/>
                         <outlet property="tfEmail" destination="iK0-Ps-JCU" id="xq0-NH-agc"/>
                         <outlet property="tfPassword" destination="GyU-QW-ihc" id="bh3-c2-Yl0"/>
@@ -1528,7 +1513,6 @@
         <image name="button-zoomin.png" width="62" height="60"/>
         <image name="button-zoomout.png" width="62" height="60"/>
         <image name="buttondelete.png" width="510" height="66"/>
-        <image name="checkbox-tick.png" width="42" height="42"/>
         <image name="distance_area.png" width="139" height="61"/>
         <image name="ic_add_number.png" width="72" height="72"/>
         <image name="ic_back.png" width="72" height="72"/>
