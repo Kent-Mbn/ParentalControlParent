@@ -83,11 +83,11 @@
             //Reload table
             [_tblView reloadData];
         } else {
-            [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+            [Common showAlertView:APP_NAME message:MSS_NO_CHILD delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideLoadingViewGlobal];
-        [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        [Common showAlertView:APP_NAME message:MSS_FAILED_GET_CHILD delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
     }];
 }
 
