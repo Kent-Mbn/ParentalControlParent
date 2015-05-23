@@ -121,7 +121,7 @@
 }
 
 - (void) callWSTrackingAllChild {
-    [Common showLoadingViewGlobal:nil];
+    [Common showNetworkActivityIndicator];
     AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
     NSMutableDictionary *request_param = [@{
                                             
@@ -145,7 +145,7 @@
             [_mapView removeAnnotations:_mapView.annotations];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [Common hideLoadingViewGlobal];
+        [Common hideNetworkActivityIndicator];
         NSLog(@"Error: %@", error.description);
     }];
 
