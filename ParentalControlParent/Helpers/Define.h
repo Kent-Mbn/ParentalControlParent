@@ -52,3 +52,6 @@
 
 #define MSS_EDIT_PROFILE_FAILED @""
 #define MSS_EDIT_PROFILE_INPUT_INVALID @"Input invalid!"
+
+#define MSS_NO_CHILD @"No child!"
+#define MSS_FAILED_GET_CHILD @"Get child failed!"
