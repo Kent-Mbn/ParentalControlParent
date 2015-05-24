@@ -58,6 +58,7 @@
             [[UserDefault user] setEmail:_tfEmail.text];
             [[UserDefault user] setFull_name:_tfName.text];
             [[UserDefault user] setPhone_number:_tfPhoneNum.text];
+            [UserDefault update];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [Common showAlertView:APP_NAME message:MSS_EDIT_PROFILE_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];

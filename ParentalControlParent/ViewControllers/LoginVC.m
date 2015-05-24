@@ -99,6 +99,7 @@
             [[UserDefault user] setPassword:_tfPassword.text];
             [[UserDefault user] setPhone_number:userDic[@"phone_number"]];
             [[UserDefault user] setToken_device:[Common getDeviceToken]];
+            [UserDefault update];
             
             [APP_DELEGATE setRootViewLoginWithCompletion:^{
                 
