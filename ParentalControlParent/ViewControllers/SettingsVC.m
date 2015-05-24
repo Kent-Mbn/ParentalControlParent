@@ -170,6 +170,7 @@
                 {
                     typeOfMap = standanrd;
                     [[UserDefault user] setType_map:@"standanrd"];
+                    [UserDefault update];
                 }
                 break;
                     
@@ -177,6 +178,7 @@
                 {
                     typeOfMap = hybrid;
                     [[UserDefault user] setType_map:@"hybrid"];
+                    [UserDefault update];
                 }
                 break;
                     
@@ -184,6 +186,7 @@
                 {
                     typeOfMap = satellite;
                     [[UserDefault user] setType_map:@"satellite"];
+                    [UserDefault update];
                 }
                 break;
                     

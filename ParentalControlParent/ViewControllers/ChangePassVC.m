@@ -49,6 +49,7 @@
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
             [[UserDefault user] setPassword:_tfNewPass.text];
+            [UserDefault update];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [Common showAlertView:APP_NAME message:MSS_CHANGE_PASS_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
