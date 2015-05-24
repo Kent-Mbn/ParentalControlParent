@@ -127,7 +127,7 @@
                                             } mutableCopy];
     NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)));
     [manager POST:URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [Common hideLoadingViewGlobal];
+        [Common hideNetworkActivityIndicator];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
             NSArray *arrData = responseObject[0][@"data"];
