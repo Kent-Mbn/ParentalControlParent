@@ -37,6 +37,8 @@
 + (float) calDistanceTwoCoordinate:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint;
 + (void) setMapTypeGlobal:(MKMapView *)mapView;
 
++ (BOOL) isValidString:(NSString *) strCheck;
+
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;
 + (double) areaOfPolygon:(NSMutableArray *) arrPoints;

@@ -158,6 +158,13 @@
     }
 }
 
++ (BOOL) isValidString:(NSString *) strCheck {
+    if (strCheck.length > 0 && ![strCheck isEqual:[NSNull null]] && ![strCheck isEqualToString:@"(null)"]) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint {
     double areaReturn = 0.0f;

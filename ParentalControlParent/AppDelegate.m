@@ -27,6 +27,17 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
     }
     
+    //Redirect screen
+    if ([Common isValidString:[NSString stringWithFormat:@"%@",[UserDefault user].parent_id]]) {
+        [self setRootViewLoginWithCompletion:^{
+            
+        }];
+    } else {
+        [self setRootViewLogoutWithCompletion:^{
+            
+        }];
+    }
+    
     return YES;
 }
 
