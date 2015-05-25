@@ -104,8 +104,9 @@
                     NSDictionary *dicPoint = arrData[i];
                     CLLocation *locaPoint = [[CLLocation alloc] initWithLatitude:[dicPoint[@"latitude"] doubleValue] longitude:[dicPoint[@"longitude"] doubleValue]];
                     [arrPoints addObject:locaPoint];
+                    [self addPinViewToMap:[Common get2DCoordFromString:[NSString stringWithFormat:@"%f,%f", [dicPoint[@"latitude"] doubleValue],[dicPoint[@"longitude"] doubleValue]]]];
+                    [self zoomToFitMapAnnotations:arrPoints];
                 }
-                [self drawLine:arrPoints];
             }
         } else {
             
@@ -114,6 +115,25 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"Error: %@", error.description);
     }];
+}
+
+-(void) zoomToFitMapAnnotations:(NSMutableArray *) arrPoints {
+    if ([arrPoints count] > 0) {
+        MKMapPoint points[[arrPoints count]];
+        for (int i = 0; i < [arrPoints count]; i++) {
+            CLLocation *locationTemp;
+            locationTemp = (CLLocation *)[arrPoints objectAtIndex:i];
+            points[i] = MKMapPointForCoordinate(locationTemp.coordinate);
+        }
+        MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrPoints count]];
+        [_mapView setVisibleMapRect:[poly boundingMapRect] edgePadding:UIEdgeInsetsMake(100, 100, 100, 100) animated:YES];
+    }
+}
+
+-(void) addPinViewToMap:(CLLocationCoordinate2D) location {
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    point.coordinate = location;
+    [_mapView addAnnotation:point];
 }
 
 - (void) drawLine:(NSMutableArray *) arrPoints {
@@ -185,6 +205,21 @@
 }
 
 #pragma mark - MAP VIEW DELEGATE
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    static NSString* AnnotationIdentifier = @"Annotation";
+    MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    if (!pinView) {
+        MKPinAnnotationView *customPinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationIdentifier];
+        customPinView.pinColor = MKPinAnnotationColorRed;
+        customPinView.animatesDrop = NO;
+        customPinView.canShowCallout = YES;
+        return customPinView;
+        
+    }
+    return pinView;
+}
+
+
 - (MKOverlayView *) mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     return _polylineView;
 }
