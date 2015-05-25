@@ -67,21 +67,22 @@
     NSMutableDictionary *request_param = [@{
                                             
                                             } mutableCopy];
-    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_GET_LIST_CHILD([UserDefault user].parent_id)));
-    [manager POST:URL_SERVER_API(API_GET_LIST_CHILD([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)));
+    [manager POST:URL_SERVER_API(API_TRACKING_ALL_CHILD([UserDefault user].parent_id)) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
             //Save data to array
             [_arrayData removeAllObjects];
-            NSArray *arrTemp = responseObject[0][@"devices"];
-            for (int i = 0; i < [arrTemp count]; i++) {
-                NSDictionary *objDic = [arrTemp objectAtIndex:i];
-                [_arrayData addObject:objDic];
+            NSArray *arrData = responseObject[0][@"data"];
+            if ([arrData count] > 0) {
+                for (int i = 0; i < [arrData count]; i++) {
+                    NSDictionary *objDic = [arrData objectAtIndex:i];
+                    [_arrayData addObject:objDic];
+                }
+                //Reload table
+                [_tblView reloadData];
             }
-            
-            //Reload table
-            [_tblView reloadData];
         } else {
             [Common showAlertView:APP_NAME message:MSS_NO_CHILD delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
         }

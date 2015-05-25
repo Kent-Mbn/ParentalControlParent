@@ -33,6 +33,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewTblView;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
 
 @property (strong, nonatomic) NSMutableArray *arrData;
 

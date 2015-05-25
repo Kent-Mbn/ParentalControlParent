@@ -105,6 +105,11 @@
                     NSDictionary *dicPoint = arrData[i];
                     CLLocationCoordinate2D coorPoint = [Common get2DCoordFromString:[NSString stringWithFormat:@"%f,%f", [dicPoint[@"latitude"] doubleValue],[dicPoint[@"longitude"] doubleValue]]];
                     
+                    //Set name to top bar
+                    if (i == 0) {
+                        _lblName.text = dicPoint[@"fullname"];
+                    }
+                    
                     //Checking point valid or not before showed to map
                     //If nil value or distance > min distance checking to show on map
                     if (![Common isValidCoordinate:centerPoint] || ([Common isValidCoordinate:centerPoint] && [Common calDistanceTwoCoordinate:centerPoint andSecondPoint:coorPoint] > minDistanceToShowHistory)) {
@@ -120,7 +125,7 @@
                 }
             }
         } else {
-            
+            _lblName.text = @"";
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideLoadingViewGlobal];
