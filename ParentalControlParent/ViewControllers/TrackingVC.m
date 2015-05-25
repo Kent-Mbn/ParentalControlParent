@@ -136,12 +136,13 @@
                 [_arrData addObject:[arrData objectAtIndex:i]];
             }
             if ([_arrData count] > 0) {
+                [_mapView removeAnnotations:_mapView.annotations];
                 [self addArrayLocationToMap];
             } else {
-                [_mapView removeAnnotations:_mapView.annotations];
+                //[_mapView removeAnnotations:_mapView.annotations];
             }
         } else {
-            [_mapView removeAnnotations:_mapView.annotations];
+            //[_mapView removeAnnotations:_mapView.annotations];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideNetworkActivityIndicator];

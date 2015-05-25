@@ -30,7 +30,9 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self callWSTrackingAllChild];
+    if ([_mapView.annotations count] == 0) {
+        [self callWSTrackingAllChild];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
