@@ -38,6 +38,7 @@
 + (void) setMapTypeGlobal:(MKMapView *)mapView;
 
 + (BOOL) isValidString:(NSString *) strCheck;
++ (BOOL) isValidCoordinate:(CLLocationCoordinate2D) checkPoint;
 
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;

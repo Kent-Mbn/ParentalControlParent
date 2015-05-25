@@ -85,7 +85,7 @@
     [Common showLoadingViewGlobal:nil];
     
     //Remove all annotations
-    [_mapView removeOverlay:_polyline];
+    [_mapView removeAnnotations:_mapView.annotations];
     
     AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
     NSMutableDictionary *request_param = [@{
@@ -100,11 +100,22 @@
             NSArray *arrData = responseObject[0][@"data"];
             if ([arrData count] > 0) {
                 NSMutableArray *arrPoints = [[NSMutableArray alloc] init];
+                CLLocationCoordinate2D centerPoint;
                 for (int i = 0; i < [arrData count]; i++) {
                     NSDictionary *dicPoint = arrData[i];
-                    CLLocation *locaPoint = [[CLLocation alloc] initWithLatitude:[dicPoint[@"latitude"] doubleValue] longitude:[dicPoint[@"longitude"] doubleValue]];
+                    CLLocationCoordinate2D coorPoint = [Common get2DCoordFromString:[NSString stringWithFormat:@"%f,%f", [dicPoint[@"latitude"] doubleValue],[dicPoint[@"longitude"] doubleValue]]];
+                    
+                    //Checking point valid or not before showed to map
+                    //If nil value or distance > min distance checking to show on map
+                    if (![Common isValidCoordinate:centerPoint] || ([Common isValidCoordinate:centerPoint] && [Common calDistanceTwoCoordinate:centerPoint andSecondPoint:coorPoint] > minDistanceToShowHistory)) {
+                        centerPoint = coorPoint;
+                    } else {
+                        continue;
+                    }
+                    
+                    CLLocation *locaPoint = [[CLLocation alloc] initWithLatitude:coorPoint.latitude longitude:coorPoint.longitude];
                     [arrPoints addObject:locaPoint];
-                    [self addPinViewToMap:[Common get2DCoordFromString:[NSString stringWithFormat:@"%f,%f", [dicPoint[@"latitude"] doubleValue],[dicPoint[@"longitude"] doubleValue]]]];
+                    [self addPinViewToMap:coorPoint];
                     [self zoomToFitMapAnnotations:arrPoints];
                 }
             }

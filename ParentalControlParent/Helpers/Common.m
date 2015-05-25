@@ -165,6 +165,13 @@
     return NO;
 }
 
++ (BOOL) isValidCoordinate:(CLLocationCoordinate2D) checkPoint {
+    if (checkPoint.latitude != 0 && checkPoint.longitude != 0 && CLLocationCoordinate2DIsValid(checkPoint)) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint {
     double areaReturn = 0.0f;

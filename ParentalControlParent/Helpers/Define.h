@@ -21,6 +21,9 @@
 //m2
 #define minOfAreaPolygon 100000
 
+//m
+#define minDistanceToShowHistory 100
+
 
 #pragma mark - MESSAGE
 #define MSS_NOTICE_LOGOUT @"Are you want to logout?"
