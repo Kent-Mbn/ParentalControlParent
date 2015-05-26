@@ -19,7 +19,19 @@
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES];
     _viewTopbar.backgroundColor = masterColor;
-    typeOfMap = standanrd;
+    
+    NSString *strMaptype = [UserDefault user].type_map;
+    if (strMaptype.length > 0) {
+        if ([strMaptype isEqualToString:@"standanrd"]) {
+            typeOfMap = standanrd;
+        }
+        if ([strMaptype isEqualToString:@"hybrid"]) {
+            typeOfMap = hybrid;
+        }
+        if ([strMaptype isEqualToString:@"satellite"]) {
+            typeOfMap = satellite;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -29,6 +29,10 @@
     [self hideViewLoadListDevice];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [Common setMapTypeGlobal:_mapView];
+}
+
 - (void) viewDidAppear:(BOOL)animated {
     if ([_mapView.annotations count] == 0) {
         [self callWSTrackingAllChild];
