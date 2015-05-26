@@ -78,13 +78,15 @@
     for (int i = 0; i < [_arrData count]; i++) {
         NSDictionary *dicObj = [_arrData objectAtIndex:i];
         CLLocationCoordinate2D cooPoint = [Common get2DCoordFromString:[NSString stringWithFormat:@"%@,%@", dicObj[@"latitude"], dicObj[@"longitude"]]];
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        point.coordinate = cooPoint;
-        point.title = dicObj[@"fullname"];
-        point.subtitle = dicObj[@"address"];
-        
-        [_arrayLocationPins addObject:point];
-        [_mapView addAnnotation:point];
+        if (cooPoint.latitude != 0 && cooPoint.longitude != 0) {
+            MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+            point.coordinate = cooPoint;
+            point.title = dicObj[@"fullname"];
+            point.subtitle = dicObj[@"address"];
+            
+            [_arrayLocationPins addObject:point];
+            [_mapView addAnnotation:point];
+        }
     }
     [self zoomToFitMapAnnotations:_arrayLocationPins];
 }
