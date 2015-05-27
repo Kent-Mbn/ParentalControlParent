@@ -31,12 +31,15 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [Common setMapTypeGlobal:_mapView];
+    
+    //Delete pair, reload at show history
+    [self callWSTrackingAllChild];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    if ([_mapView.annotations count] == 0) {
-        [self callWSTrackingAllChild];
-    }
+    //if ([_mapView.annotations count] == 0) {
+    
+    //}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -209,7 +212,11 @@
                 [self callWSGetAllHistories];
             }
         } else {
-            
+            //No data
+            //Remove all annotations
+            [_arrData removeAllObjects];
+            [_tblView reloadData];
+            [_mapView removeAnnotations:_mapView.annotations];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideLoadingViewGlobal];

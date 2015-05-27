@@ -139,10 +139,10 @@
                 [_mapView removeAnnotations:_mapView.annotations];
                 [self addArrayLocationToMap];
             } else {
-                //[_mapView removeAnnotations:_mapView.annotations];
+                [_mapView removeAnnotations:_mapView.annotations];
             }
         } else {
-            //[_mapView removeAnnotations:_mapView.annotations];
+            [_mapView removeAnnotations:_mapView.annotations];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [Common hideNetworkActivityIndicator];

@@ -73,8 +73,8 @@
     NSMutableDictionary *request_param = [@{
                                             
                                             } mutableCopy];
-    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_DELETE_DEVICE(_deviceObj[@"id"])));
-    [manager GET:URL_SERVER_API(API_DELETE_DEVICE(_deviceObj[@"id"])) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_DELETE_PAIR_DEVICE([UserDefault user].parent_id,_deviceObj[@"id"])));
+    [manager GET:URL_SERVER_API(API_DELETE_PAIR_DEVICE([UserDefault user].parent_id,_deviceObj[@"id"])) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {

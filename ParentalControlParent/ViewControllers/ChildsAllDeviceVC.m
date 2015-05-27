@@ -84,6 +84,8 @@
                 [_tblView reloadData];
             }
         } else {
+            [_arrayData removeAllObjects];
+            [_tblView reloadData];
             [Common showAlertView:APP_NAME message:MSS_NO_CHILD delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -107,6 +109,7 @@
     //Button tag = id of device
     cell.btSetArea.tag = [objDic[@"id"] integerValue];
     [cell.btSetArea addTarget:self action:@selector(goToChangeSafeArea:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = cell.btSetArea;
     return cell;
 }
 
