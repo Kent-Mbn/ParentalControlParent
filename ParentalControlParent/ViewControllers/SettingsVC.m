@@ -88,6 +88,7 @@
         case 1:
         {
             cell.imvTick.hidden = YES;
+            cell.accessoryView = cell.imvTick;
             switch (indexPath.row) {
                 case 0:
                 {
