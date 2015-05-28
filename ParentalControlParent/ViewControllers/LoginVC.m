@@ -22,6 +22,12 @@
     self.view.backgroundColor = masterColor;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    //Set init data for login
+    _tfEmail.text = [UserDefault user].email;
+    _tfPassword.text = [UserDefault user].password;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

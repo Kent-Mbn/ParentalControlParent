@@ -32,11 +32,15 @@
 - (void) viewWillAppear:(BOOL)animated {
     [Common setMapTypeGlobal:_mapView];
     
+    /*
     //Delete pair, reload at show history
     AppDelegate *appdele = APP_DELEGATE;
     if (appdele.isDeletePaired) {
         [self callWSTrackingAllChild];
     }
+     */
+    
+    //[self callWSTrackingAllChild];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -63,6 +67,7 @@
 #pragma mark - ACTION
 
 - (IBAction)actionSelectDevice:(id)sender {
+    [self callWSTrackingAllChild];
     [self showViewLoadListDevice];
 }
 
@@ -213,11 +218,16 @@
             for (int i = 0; i < [arrData count]; i++) {
                 [_arrData addObject:[arrData objectAtIndex:i]];
             }
+            
+            /*
             if ([_arrData count] > 0) {
                 NSDictionary *objDic = _arrData[0];
                 _strIdChild = objDic[@"id"];
                 [self callWSGetAllHistories];
             }
+             */
+            [_tblView reloadData];
+            
         } else {
             //No data
             //Remove all annotations

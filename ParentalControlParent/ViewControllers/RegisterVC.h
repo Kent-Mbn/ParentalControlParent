@@ -12,6 +12,7 @@
 #import "APIService.h"
 #import "AFNetworking.h"
 #import "UIKit+AFNetworking.h"
+#import "UserDefault.h"
 
 @interface RegisterVC : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *tfFullName;

@@ -86,6 +86,9 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response LOGIN: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
+            [UserDefault user].email = _tfEmail.text;
+            [UserDefault user].password = _tfPass.text;
+            [UserDefault update];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [Common showAlertView:APP_NAME message:MSS_REGISTER_FAILDED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
