@@ -100,17 +100,19 @@
 }
 
 -(void) zoomToFitMapAnnotations:(NSMutableArray *)arrLocationPins {
-    MKMapPoint points[[arrLocationPins count]];
-    for (int i = 0; i < [arrLocationPins count]; i++) {
-        CLLocation *locationTemp;
-        locationTemp = (CLLocation *)[arrLocationPins objectAtIndex:i];
-        points[i] = MKMapPointForCoordinate(locationTemp.coordinate);
+    if ([arrLocationPins count] > 0) {
+        MKMapPoint points[[arrLocationPins count]];
+        for (int i = 0; i < [arrLocationPins count]; i++) {
+            CLLocation *locationTemp;
+            locationTemp = (CLLocation *)[arrLocationPins objectAtIndex:i];
+            points[i] = MKMapPointForCoordinate(locationTemp.coordinate);
+        }
+        MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrLocationPins count]];
+        MKCoordinateRegion r = MKCoordinateRegionForMapRect([poly boundingMapRect]);
+        r.span.latitudeDelta += 0.01;
+        r.span.longitudeDelta += 0.01;
+        [_mapView setRegion: r animated:YES];
     }
-    MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrLocationPins count]];
-    MKCoordinateRegion r = MKCoordinateRegionForMapRect([poly boundingMapRect]);
-    r.span.latitudeDelta += 0.01;
-    r.span.longitudeDelta += 0.01;
-    [_mapView setRegion: r animated:YES];
 }
 
 - (void) focusToAPoint:(MKPointAnnotation *) point {
