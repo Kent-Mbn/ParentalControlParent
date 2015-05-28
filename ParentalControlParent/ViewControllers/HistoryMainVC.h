@@ -18,6 +18,7 @@
 #import "APIService.h"
 #import "Common.h"
 #import "HistorySelectDevicesCell.h"
+#import "AppDelegate.h"
 
 @interface HistoryMainVC : UIViewController<MKMapViewDelegate,UITableViewDataSource, UITableViewDelegate>
 

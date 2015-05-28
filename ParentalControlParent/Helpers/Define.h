@@ -24,6 +24,8 @@
 //m
 #define minDistanceToShowHistory 100
 
+//GOOGLE KEY
+#define GOOGLE_API_KEY @"AIzaSyDskXhfD0_lsUlyutZUd-U6vtS66xBgZlQ"
 
 #pragma mark - MESSAGE
 #define MSS_NOTICE_LOGOUT @"Are you want to logout?"

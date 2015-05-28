@@ -78,6 +78,10 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
+            //Set isDeletePair to YES
+            AppDelegate *appdele = APP_DELEGATE;
+            appdele.isDeletePaired = YES;
+            
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [Common showAlertView:APP_NAME message:MSS_DELETE_DEVICE_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];

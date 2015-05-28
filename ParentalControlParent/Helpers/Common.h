@@ -14,6 +14,7 @@
 #import "UIKit+AFNetworking.h"
 #import "Define.h"
 #import "UserDefault.h"
+#import "APIService.h"
 
 @interface Common : NSObject
 
@@ -39,6 +40,8 @@
 
 + (BOOL) isValidString:(NSString *) strCheck;
 + (BOOL) isValidCoordinate:(CLLocationCoordinate2D) checkPoint;
+
++ (void) getAddressFromGoogleApi:(double)numLat andLong:(double)numLong completion:(void(^)(NSString *strAddress))completBlock;
 
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;

@@ -172,6 +172,43 @@
     return NO;
 }
 
++ (void) getAddressFromGoogleApi:(double)numLat andLong:(double)numLong completion:(void(^)(NSString *strAddress))completBlock {
+    [Common showNetworkActivityIndicator];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSString *strLat = [NSString stringWithFormat:@"%f", numLat];
+    NSString *strLong = [NSString stringWithFormat:@"%f", numLong];
+    __block NSString *strAddress = @"";
+    NSMutableDictionary *request_param = [@{
+                                            
+                                            } mutableCopy];
+    NSLog(@"GET ADDRESS FROM GOOGLE: %@ %@", request_param, API_ADDRESS_GOOGLE(strLat, strLong, GOOGLE_API_KEY));
+    [manager GET:API_ADDRESS_GOOGLE(strLat, strLong, GOOGLE_API_KEY) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideNetworkActivityIndicator];
+        NSLog(@"GET ADDRESS FROM GOOGLE RESPONE: %@", responseObject);
+        
+        //Parse data address
+        NSArray *arrResult = responseObject[@"results"];
+        if ([arrResult count] > 0) {
+            NSDictionary *address_components = [arrResult objectAtIndex:0];
+            NSArray *arrAddress = address_components[@"address_components"];
+            if ([arrAddress count] > 0) {
+                //Get street number
+                NSDictionary *dicStreetNum = [arrAddress objectAtIndex:0];
+                strAddress = [NSString stringWithFormat:@"%@%@", strAddress, dicStreetNum[@"long_name"]];
+                
+                //Get street name
+                NSDictionary *dicStreetName = [arrAddress objectAtIndex:1];
+                strAddress = [NSString stringWithFormat:@"%@ %@", strAddress, dicStreetName[@"long_name"]];
+                
+            }
+        }
+        completBlock(strAddress);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideNetworkActivityIndicator];
+        completBlock(strAddress);
+    }];
+}
+
 #pragma mark - Algorthim calculate area of polygon and circle
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint {
     double areaReturn = 0.0f;

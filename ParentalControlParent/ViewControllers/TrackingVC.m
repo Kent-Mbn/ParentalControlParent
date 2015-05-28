@@ -63,8 +63,6 @@
 
 #pragma mark - ACTION
 - (IBAction)actionListDevice:(id)sender {
-    //[self performSegueWithIdentifier:@"sugueToListDeviceFromTracking" sender:nil];
-    //[self focusToAPoint:[_arrayLocationPins objectAtIndex:0]];
     [self showViewLoadListDevice];
 }
 
@@ -78,13 +76,19 @@
     for (int i = 0; i < [_arrData count]; i++) {
         NSDictionary *dicObj = [_arrData objectAtIndex:i];
         CLLocationCoordinate2D cooPoint = [Common get2DCoordFromString:[NSString stringWithFormat:@"%@,%@", dicObj[@"latitude"], dicObj[@"longitude"]]];
-        if (cooPoint.latitude != 0 && cooPoint.longitude != 0) {
             MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
             point.coordinate = cooPoint;
             point.title = dicObj[@"fullname"];
-            point.subtitle = dicObj[@"address"];
-            
+        
+            //Get Address
+            [Common getAddressFromGoogleApi:cooPoint.latitude andLong:cooPoint.longitude completion:^(NSString *strAddress) {
+                NSLog(@"String Address: %@", strAddress);
+                point.subtitle = strAddress;
+            }];
             [_arrayLocationPins addObject:point];
+        //return;
+        //Only valid point -> show on MAP
+        if (cooPoint.latitude != 0 && cooPoint.longitude != 0) {
             [_mapView addAnnotation:point];
         }
     }
@@ -100,14 +104,26 @@
 }
 
 -(void) zoomToFitMapAnnotations:(NSMutableArray *)arrLocationPins {
-    if ([arrLocationPins count] > 0) {
-        MKMapPoint points[[arrLocationPins count]];
-        for (int i = 0; i < [arrLocationPins count]; i++) {
+    //Filter arrLocationPins
+    NSMutableArray *arrLocationPinsFilter = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [arrLocationPins count]; i++) {
+        CLLocation *locationTemp;
+        locationTemp = (CLLocation *)[arrLocationPins objectAtIndex:i];
+        CLLocationCoordinate2D pointCoo = locationTemp.coordinate;
+        if (pointCoo.latitude != 0 && pointCoo.longitude != 0) {
+            [arrLocationPinsFilter addObject:locationTemp];
+        }
+    }
+    
+    //Begin zoom map with array points
+    if ([arrLocationPinsFilter count] > 0) {
+        MKMapPoint points[[arrLocationPinsFilter count]];
+        for (int i = 0; i < [arrLocationPinsFilter count]; i++) {
             CLLocation *locationTemp;
-            locationTemp = (CLLocation *)[arrLocationPins objectAtIndex:i];
+            locationTemp = (CLLocation *)[arrLocationPinsFilter objectAtIndex:i];
             points[i] = MKMapPointForCoordinate(locationTemp.coordinate);
         }
-        MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrLocationPins count]];
+        MKPolygon *poly = [MKPolygon polygonWithPoints:points count:[arrLocationPinsFilter count]];
         MKCoordinateRegion r = MKCoordinateRegionForMapRect([poly boundingMapRect]);
         r.span.latitudeDelta += 0.01;
         r.span.longitudeDelta += 0.01;
@@ -232,7 +248,11 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self focusToAPoint:(MKPointAnnotation *)[_arrayLocationPins objectAtIndex:indexPath.row]];
+    MKPointAnnotation *point = [_arrayLocationPins objectAtIndex:indexPath.row];
+    CLLocationCoordinate2D cooPoint = point.coordinate;
+    if (cooPoint.latitude != 0 && cooPoint.longitude != 0) {
+        [self focusToAPoint:(MKPointAnnotation *)[_arrayLocationPins objectAtIndex:indexPath.row]];
+    }
     [self hideViewLoadListDevice];
 }
 @end

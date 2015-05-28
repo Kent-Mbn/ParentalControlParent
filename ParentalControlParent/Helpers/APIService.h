@@ -42,25 +42,6 @@
 
 #define API_GET_HISTORIES(parent_id) [NSString stringWithFormat:@"/history/gethistories/%@", parent_id]
 
-
-/*
-#define API_GET_USER_POST_LIST @"/user/stat"
-#define API_COMPOSE_POST @"/user/post"
-#define API_UPLOAD_MEDIA(post_id) [NSString stringWithFormat:@"/post/%@/media", post_id]
-#define API_GET_POST_OF_USER(user_id) [NSString stringWithFormat:@"/user/%@/post", user_id]
-#define API_COMMENT_FOR_A_POST(post_id) [NSString stringWithFormat:@"/post/%@/comment", post_id]
-
-#define API_UPDATE_LOCATION @"/user/location"
-#define API_LIST_USER @"/user/search"
-#define API_LIST_POST @"/post/search"
-#define API_LIKE_DISLIKE_POST(post_id) [NSString stringWithFormat:@"/post/%@/vote", post_id]
-
-#define API_CHANGE_NAME_MY_PROFILE @"/user/profile"
-#define API_CHANGE_AVATAR_MY_PROFILE @"/user/avatar"
-
-#define API_GET_PROFILE(user_id) [NSString stringWithFormat:@"/user/%@", user_id]
-#define KEY_RESPONE_LOGIN_SUCCESS @"success"
- */
-
+#define API_ADDRESS_GOOGLE(lat,long,key) [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@,%@&key=%@", lat, long, key]
 
 

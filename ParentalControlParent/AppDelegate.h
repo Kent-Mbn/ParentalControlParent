@@ -19,6 +19,9 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+//BOOL for checking delete pair is successfull, at this point, history will reload
+@property (nonatomic) BOOL isDeletePaired;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

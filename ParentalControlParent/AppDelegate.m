@@ -27,6 +27,9 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)];
     }
     
+    //Set YES for the first running, can not set NO
+    self.isDeletePaired = YES;
+    
     //Redirect screen
     if ([Common isValidString:[NSString stringWithFormat:@"%@",[UserDefault user].parent_id]]) {
         [self setRootViewLoginWithCompletion:^{

@@ -13,6 +13,7 @@
 #import "UIKit+AFNetworking.h"
 #import "UserDefault.h"
 #import "Common.h"
+#import "AppDelegate.h"
 
 @interface ChildsEditDeviceVC : UIViewController<UITextFieldDelegate>
 - (IBAction)actionBack:(id)sender;

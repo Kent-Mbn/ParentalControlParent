@@ -33,7 +33,10 @@
     [Common setMapTypeGlobal:_mapView];
     
     //Delete pair, reload at show history
-    [self callWSTrackingAllChild];
+    AppDelegate *appdele = APP_DELEGATE;
+    if (appdele.isDeletePaired) {
+        [self callWSTrackingAllChild];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -201,6 +204,10 @@
         [Common hideLoadingViewGlobal];
         NSLog(@"response: %@", responseObject);
         if ([Common validateRespone:responseObject]) {
+            //Set isDeletePair to NO
+            AppDelegate *appdele = APP_DELEGATE;
+            appdele.isDeletePaired = NO;
+            
             NSArray *arrData = responseObject[0][@"data"];
             [_arrData removeAllObjects];
             for (int i = 0; i < [arrData count]; i++) {
