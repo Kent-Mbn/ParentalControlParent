@@ -90,15 +90,31 @@
         [self addPinViewToMap:touchCoordinate];
     } else {
         CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:touchCoordinate.latitude longitude:touchCoordinate.longitude];
-        [_arrayForPolygon addObject:currentLocation];
-        
-        [self addPinViewToMap:touchCoordinate];
-        
-        //Check if tapped 2 point -> draw a line before
-        if ([_arrayForPolygon count] == 2) {
-            [self drawLine];
+        //Checking new touch point is valid with polygon, if not -> don't add to map
+        if ([_arrayForPolygon count] > 2) {
+            NSMutableArray *arrToCheck = [[NSMutableArray alloc] initWithArray:_arrayForPolygon];
+            [arrToCheck addObject:currentLocation];
+            if ([Common checkPolygonSafeArea:arrToCheck]) {
+                [_arrayForPolygon addObject:currentLocation];
+                [self addPinViewToMap:touchCoordinate];
+                //Check if tapped 2 point -> draw a line before
+                if ([_arrayForPolygon count] == 2) {
+                    [self drawLine];
+                } else {
+                    [self drawPolygon];
+                }
+            } else {
+                [Common showAlertView:APP_NAME message:MSS_ADD_SAFE_AREA_INVALID_POLYGON delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+            }
         } else {
-            [self drawPolygon];
+            [_arrayForPolygon addObject:currentLocation];
+            [self addPinViewToMap:touchCoordinate];
+            //Check if tapped 2 point -> draw a line before
+            if ([_arrayForPolygon count] == 2) {
+                [self drawLine];
+            } else {
+                [self drawPolygon];
+            }
         }
     }
 }

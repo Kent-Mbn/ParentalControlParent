@@ -47,4 +47,8 @@
 + (double) areaOfTriangle:(CLLocationCoordinate2D)firstPoint andSecondPoint:(CLLocationCoordinate2D)secondPoint andThirdPoint:(CLLocationCoordinate2D)thirdPoint;
 + (double) areaOfPolygon:(NSMutableArray *) arrPoints;
 
+#pragma mark - Algorthim checking polygon safe area
++ (BOOL) checkTwoPointsSideWithSegment:(CLLocationCoordinate2D) pointA1 : (CLLocationCoordinate2D)pointB1 :(CLLocationCoordinate2D)pointA2 :(CLLocationCoordinate2D)pointB2;
++ (BOOL) checkPolygonSafeArea:(NSMutableArray *) arrayPoints;
+
 @end

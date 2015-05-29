@@ -48,6 +48,7 @@
 
 #define MSS_ADD_SAFE_AREA_FAILED @"Add safe area failed!"
 #define MSS_ADD_SAFE_AREA_TOO_SMALL @"The safe area is too small! Please set other safe area!"
+#define MSS_ADD_SAFE_AREA_INVALID_POLYGON @"Invalid point! Please add another point!"
 
 #define MSS_EDIT_DEVICE_FAILED @"Edit device failed!"
 #define MSS_DELETE_DEVICE_FAILED @"Delete device failed!"

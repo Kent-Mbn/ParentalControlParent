@@ -245,5 +245,85 @@
     return areaReturn;
 }
 
+#pragma mark - Algorthim checking polygon safe area
++ (BOOL) checkTwoPointsSideWithSegment:(CLLocationCoordinate2D) pointA1 : (CLLocationCoordinate2D)pointB1 :(CLLocationCoordinate2D)pointA2 :(CLLocationCoordinate2D)pointB2 {
+    
+    //A2 and B2 -> SEGMENT
+    
+    //SEGMENT: f(x,y) = (x-x1)/(x2-x1) = (y-y1)/(y2-y1)
+    //A2(a1,b1) and B2(a2,b2) f(A2)*f(B2) < 0
+    
+    //SEGMENT POINTS
+    //A2
+    double x1 = pointA2.latitude;
+    double y1 = pointA2.longitude;
+    
+    //B2
+    double x2 = pointB2.latitude;
+    double y2 = pointB2.longitude;
+    
+    //POINTS CHECKING
+    //A1
+    double xc1 = pointA1.latitude;
+    double yc1 = pointA1.longitude;
+    
+    //B2
+    double xc2 = pointB1.latitude;
+    double yc2 = pointB1.longitude;
+    
+    //f(A2)
+    double fA2 = ((x2 - x1) * (yc1 - y1)) - ((y2 - y1) * (xc1 - x1));
+    
+    //f(B2)
+    double fB2 = ((x2 - x1) * (yc2 - y1)) - ((y2 - y1) * (xc2 - x1));
+    
+    if (fA2 * fB2 < 0) {
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL) checkPolygonSafeArea:(NSMutableArray *) arrayPoints {
+    if ([arrayPoints count] > 2) {
+        
+        CLLocationCoordinate2D pointBegin;
+        CLLocationCoordinate2D pointNextLast;
+        CLLocationCoordinate2D pointNew;
+        NSMutableArray *arrMediumPoints = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < [arrayPoints count]; i++) {
+            CLLocation *point = [arrayPoints objectAtIndex:i];
+            NSLog(@"POINT: %f and %f", point.coordinate.latitude, point.coordinate.longitude);
+            if (i == 0) {
+                //Get point Begin
+                pointBegin = point.coordinate;
+                continue;
+            } else if (i == [arrayPoints count] - 2) {
+                //Get point Next Last
+                pointNextLast = point.coordinate;
+                continue;
+            } else if (i == [arrayPoints count] - 1) {
+                //Get point Last
+                pointNew = point.coordinate;
+                continue;
+            } else {
+                //Get point medium
+                [arrMediumPoints addObject:point];
+            }
+        }
+        
+        //CHECKING BEGIN....
+        for (int i = 0; i < [arrMediumPoints count]; i++) {
+            CLLocation *point = [arrMediumPoints objectAtIndex:i];
+            if (!([self checkTwoPointsSideWithSegment:point.coordinate :pointNew :pointBegin :pointNextLast] && [self checkTwoPointsSideWithSegment:pointBegin :pointNextLast :point.coordinate :pointNew])) {
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+
 
 @end
