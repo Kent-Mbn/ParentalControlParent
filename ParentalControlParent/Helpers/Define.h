@@ -41,6 +41,10 @@
 #define MSS_LOGIN_INVALID_PASSWORD @"Password is invalid."
 #define MSS_LOGIN_FAILED @"Login failed!"
 
+#define MSS_FORGOT_PASS_INVALID_EMAIL @"Email is invalid."
+#define MSS_FORGOT_PASS_SUCCESS @"Please see new password in your inbox mail!"
+#define MSS_FORGOT_PASS_FAILED @"Forget password failed!"
+
 #define MSS_ADD_PAIR_FAILED @"Add pair failed!"
 #define MSS_ADD_PAIR_NICK_NAME_INVALID @"Nick name is invalid."
 #define MSS_ADD_PAIR_PHONE_NUMBER_INVALID @"Phone Number is invalid."

@@ -36,10 +36,69 @@
 }
 */
 
+#pragma mark - FUNCTION
+
+- (BOOL) isValid {
+    if (_tfEmail.text.length == 0) {
+        [Common showAlertView:APP_NAME message:MSS_FORGOT_PASS_INVALID_EMAIL delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        return NO;
+    }
+    
+    if (![Common isValidEmail:_tfEmail.text]) {
+        [Common showAlertView:APP_NAME message:MSS_FORGOT_PASS_INVALID_EMAIL delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        return NO;
+    }
+    return YES;
+}
+
+- (void) callWSForgetPass {
+    [Common showLoadingViewGlobal:nil];
+    AFHTTPRequestOperationManager *manager = [Common AFHTTPRequestOperationManagerReturn];
+    NSMutableDictionary *request_param = [@{
+                                            @"email":_tfEmail.text,
+                                            } mutableCopy];
+    NSLog(@"request_param: %@ %@", request_param, URL_SERVER_API(API_FORGET_PASSWORD));
+    [manager POST:URL_SERVER_API(API_FORGET_PASSWORD) parameters:request_param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Common hideLoadingViewGlobal];
+        NSLog(@"response ForgetPass: %@", responseObject);
+        if ([Common validateRespone:responseObject]) {
+            [self actionHideKeyboard:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [Common hideLoadingViewGlobal];
+        [Common showAlertView:APP_NAME message:MSS_LOGIN_FAILED delegate:self cancelButtonTitle:@"OK" arrayTitleOtherButtons:nil tag:0];
+    }];
+}
+
+#pragma mark - ACTION
 - (IBAction)actionForgotPass:(id)sender {
+    if ([self isValid]) {
+        [self callWSForgetPass];
+    } else {
+        [self actionHideKeyboard:nil];
+    }
 }
 
 - (IBAction)actionBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)actionHideKeyboard:(id)sender {
+    [_tfEmail resignFirstResponder];
+    [_scrView setContentOffset:CGPointMake(0, -20) animated:YES];
+}
+
+#pragma mark - TEXTFIELD DELEGATE
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [_scrView setContentOffset:CGPointMake(0, 30) animated:YES];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self actionForgotPass:nil];
+    return YES;
 }
 @end

@@ -10,10 +10,12 @@
 #import "Common.h"
 #import "Define.h"
 
-@interface ForgotPassVC : UIViewController
+@interface ForgotPassVC : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *viewBGFGPass;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmail;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrView;
 - (IBAction)actionForgotPass:(id)sender;
 - (IBAction)actionBack:(id)sender;
+- (IBAction)actionHideKeyboard:(id)sender;
 
 @end

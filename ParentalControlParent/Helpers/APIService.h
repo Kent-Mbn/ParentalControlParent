@@ -44,4 +44,6 @@
 
 #define API_ADDRESS_GOOGLE(lat,long,key) [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@,%@&key=%@", lat, long, key]
 
+#define API_FORGET_PASSWORD @"/user/reminderpassword"
+
 

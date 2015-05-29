@@ -502,6 +502,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OPr-gQ-lgx">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionHideKeyboard:" destination="NSp-1e-f8Z" eventType="touchUpInside" id="oNs-1m-wox"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" id="QuV-Lh-KBp">
                                         <rect key="frame" x="15" y="140" width="290" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -511,7 +521,10 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="NSp-1e-f8Z" id="Olu-KJ-Tg2"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parental Control" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6YG-VH-zKn">
                                                 <rect key="frame" x="42" y="29" width="206" height="39"/>
@@ -567,6 +580,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Forgot Password" id="8gc-tu-iTT"/>
                     <connections>
+                        <outlet property="scrView" destination="ikR-vm-GFT" id="mtA-xy-8ko"/>
                         <outlet property="tfEmail" destination="1ba-gz-yJP" id="QGo-o1-AqA"/>
                         <outlet property="viewBGFGPass" destination="QuV-Lh-KBp" id="wcn-Tl-Van"/>
                     </connections>
